@@ -1,59 +1,39 @@
-import React from 'react';
-import Illustration from '../../components/Illustration';
-import Image from '../../components/Image';
-import InputField from '../../components/InputField';
+import React from 'react'
+import InputField from '../../components/InputField'
+import Button from '../../components/Button'
+import IconButton from '../../components/IconButton'
 
 const Register = () => {
   return (
-    <main class="main-content  mt-0">
-      <section>
-        <div class="page-header min-vh-100">
-          <div class="container">
-            <div class="row">
-              <div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column mx-lg-0 mx-auto">
-                <div class="card card-plain">
-                  <div class="card-header pb-0 text-left">
-                    <h4 class="font-weight-bolder">Sign Up</h4>
-                    <p class="mb-0">Enter your email and password to register</p>
-                  </div>
-                  <div class="card-body pb-3">
-                    <form role="form">
-                      <label>Name</label>
-                      <InputField type="text" placeholder="Name" ariaLabel="Name"/>
-                      <label>Email</label>
-                      <InputField type="email" placeholder="Email" ariaLabel="Email"/>
-                      <label>Password</label>
-                      <InputField type="password" placeholder="Password" ariaLabel="Password"/>
-                      <label>Confirm Password</label>
-                      <InputField type="password" placeholder="Confirm Password" ariaLabel="Confirm Password"/>
-                      <div class="form-check form-check-info text-left">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked/>
-                          <label class="form-check-label" for="flexCheckDefault">
-                            I agree the <a href="../../../pages/privacy.html" class="text-dark font-weight-bolder">Terms and Conditions</a>
-                          </label>
-                      </div>
-                      <div class="text-center">
-                        <button type="button" class="btn bg-gradient-info w-100 mt-4 mb-0">Sign up</button>
-                      </div>
-                    </form>
-                  </div>
-                  <div class="card-footer text-center pt-0 px-sm-4 px-1">
-                    <p class="mb-4 mx-auto">
-                      Already have an account?
-                      <a href="#" class="text-info text-gradient font-weight-bold">Sign in</a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 end-0 text-center justify-content-center flex-column">
-                <Illustration appName="RentProp" tagline="Temukan dan Jual Properti Anda dengan Mudah"/>
-              </div>
-            </div>
+    <div className='container mx-auto'>
+      <div className='flex justify-start items-center h-screen'>
+        <div className='w-3/5'>
+          <img srcSet='img/Illustration.png' className='w-5/6 mx-auto mb-5' />
+          <h1 className='text-6xl font-semibold text-center mb-5'>Estancy</h1>
+          <p className='text-base text-center'>The shortest distance between paradise and the place you call home</p>
+        </div>
+        <div className='w-2/5 my-auto pr-32 pl-8'>
+          <h4 className='text-2xl font-semibold mb-3'>Sign Up</h4>
+          <p className='text-base mb-3 font-normal text-base'>Fill out this form to be a part of us</p>
+          <InputField type={'name'} id={'name'} name={'name'} placeholder={'Full Name'} />
+          <InputField type={'email'} id={'email'} name={'email'} placeholder={'Email'} />
+          <InputField type={'password'} id={'password'} name={'password'} placeholder={'Password'} />
+          <InputField type={'confirm_password'} id={'confirm_password'} name={'confirm_password'} placeholder={'Confirm Password'} />
+          <div className='flex justify-start mb-3'>
+            <p>I agree the <a href="#" className='text-secondary font-medium'>Term and Conditions</a></p>
+          </div>
+          <Button value={'Sign Up'} />
+          <p className='text-center font-normal'>Already have an account? <a href="#" className='text-secondary font-medium'>Sign in here</a></p>
+          <p className='text-center mt-8 mb-3 font-normal text-xl'> or sign up with </p>
+          <div className='flex justify-evenly mx-16'>
+            <IconButton img={'img/icons/google.png'} />
+            <IconButton img={'img/icons/apple.png'} />
+            <IconButton img={'img/icons/facebook.png'} />
           </div>
         </div>
-      </section>
-    </main>
+      </div>
+    </div>
   )
 }
 
-export default Register;
+export default Register
