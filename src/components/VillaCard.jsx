@@ -1,13 +1,13 @@
 import React from 'react'
 
-const VillaCard = () => {
+const VillaCard = ({img, name, reviews, address, price}) => {
   return (
     <div class="p-10">
       <div class="w-80 h-96 left-0.5 top-2 shadow-md rounded-lg bg-white flex-none order-none grow-0 my-0 mx-7">
-        <img srcSet='img/icons/room.png' className='w-80 h-48 left-0 top-0 rounded-lg' />
+        <img srcSet={img} className='w-80 h-48 left-0 top-0 rounded-lg' />
         <div class="px-6 py-4">
           <div class="font-bold text-xl mb-2">
-            <p className='absolute w-48 h-11 top-60 font-sans not-italic '>Villa Pertama</p>
+            <p className='absolute w-48 h-11 top-60 font-sans not-italic '>{name}</p>
           </div>
           <div className='flex'>
             <div className='flex flex w-20 mt-7 h-4 left-3 top-72'>
@@ -41,12 +41,12 @@ const VillaCard = () => {
             </div>
             <div className='flex mt-7'>
               <p className='ml-6 font-sans non-italic font-normal text-xs leading-4 text-center'>
-              8 Reviews
+              {reviews}
               </p>
             </div>
           </div>
-          <p className='mt-3 font-sans non-italic font-normal mb-7'>Jl Salemba Tgh 39-BB 10440</p>
-          <p className='mt-3 font-bold text-xl'>RP 1,750,000</p>
+          <p className='mt-3 font-sans non-italic font-normal mb-7'>{address}</p>
+          <p className='mt-3 font-bold text-xl'>{price}</p>
         </div>
         <div class="px-6 pt-4 pb-2">
           <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"></span>
