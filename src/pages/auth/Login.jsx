@@ -2,6 +2,7 @@ import React from 'react'
 import InputField from '../../components/InputField'
 import Button from '../../components/Button'
 import IconButton from '../../components/IconButton'
+import { Link } from 'react-router-dom'
 
 const Login = () => {
   return (
@@ -20,8 +21,10 @@ const Login = () => {
           <div className='flex justify-end mb-3'>
             <a href='#' className='text-secondary font-medium'>Forgot your password?</a>
           </div>
-          <Button value={'Sign In'}/>
-          <p className='text-center'>Don't have an account? <a href="#" className='text-secondary font-medium'>Sign up here!</a></p>
+          <Link to={'/'}>
+            <Button value={'Sign In'}/>
+          </Link>
+          <p className='text-center'>Don't have an account? <Link to={'/register'} className='text-secondary'>Sign up here!</Link></p>
           <p className='text-center mt-8 mb-3'> or sign in with </p>
           <div className='flex justify-evenly mx-16'>
             <IconButton img={'img/icons/google.png'}/>

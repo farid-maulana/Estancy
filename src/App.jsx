@@ -1,16 +1,20 @@
-import logo from './logo.svg';
 import './App.css';
-import Login from './pages/auth/Login';
-import Register from './pages/auth/Register';
-import ResetPassword2 from './pages/auth/ResetPassword2'
-import CardBestDeal from './pages/TampilCard';
-import AboutUs from './pages/AboutUs'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Login from './pages/auth/Login'
+import Register from './pages/auth/Register'
+import Home from './pages/client/Home'
+import AboutUs from './pages/client/AboutUs'
 
 function App() {
   return (
-    // <CardBestDeal/>
-    // <Register/>
-    <AboutUs/>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/login' element={<Login/>}/>
+        <Route path='/register' element={<Register/>}/>
+        <Route path='/' element={<Home/>}/>
+        <Route path='/about-us' element={<AboutUs/>}/>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

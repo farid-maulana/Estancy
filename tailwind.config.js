@@ -3,7 +3,11 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      lineHeight: {
+        'extra-loose': '64px',
+      }
+    },
     colors: {
       'primary': '#6078F8',
       'white': '#FFFFFF',

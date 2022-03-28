@@ -2,6 +2,7 @@ import React from 'react'
 import InputField from '../../components/InputField'
 import Button from '../../components/Button'
 import IconButton from '../../components/IconButton'
+import { Link } from 'react-router-dom'
 
 const Register = () => {
   return (
@@ -23,7 +24,7 @@ const Register = () => {
             <p>I agree the <a href="#" className='text-secondary font-medium'>Term and Conditions</a></p>
           </div>
           <Button value={'Sign Up'} />
-          <p className='text-center font-normal'>Already have an account? <a href="#" className='text-secondary font-medium'>Sign in here</a></p>
+          <p className='text-center font-normal'>Already have an account? <Link to={'/login'} className='text-secondary font-medium'>Sign in here</Link></p>
           <p className='text-center mt-8 mb-3 font-normal text-xl'> or sign up with </p>
           <div className='flex justify-evenly mx-16'>
             <IconButton img={'img/icons/google.png'} />

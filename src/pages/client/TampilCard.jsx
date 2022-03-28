@@ -1,5 +1,5 @@
 import React from 'react'
-import VillaCard from '../components/VillaCard'
+import VillaCard from '../../components/VillaCard'
 
 const TampilCard = () => {
   return (
