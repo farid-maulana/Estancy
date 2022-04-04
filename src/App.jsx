@@ -6,6 +6,7 @@ import Home from './pages/client/Home'
 import AboutUs from './pages/client/AboutUs'
 import ResetPassword1 from './pages/auth/ResetPassword1';
 import ResetPassword2 from './pages/auth/ResetPassword2';
+import ContactUs from './pages/client/ContactUs';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path='/reset-password' element={<ResetPassword2/>}/>
         <Route path='/' element={<Home/>}/>
         <Route path='/about-us' element={<AboutUs/>}/>
+        <Route path='/contact-us' element={<ContactUs/>}/>
       </Routes>
     </BrowserRouter>
   );

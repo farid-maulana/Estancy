@@ -9,7 +9,7 @@ const Navbar = () => {
             <Link to={'/'} className='ml-14 h-6 font-normal text-base'>Home</Link>
             <a href="#" className='h-6 font-normal text-base'>Property</a>
             <Link to={'/about-us'} className='h-6 font-normal text-base'>About Us</Link>
-            <a href="#" className='mr-28 h-6 font-normal text-base '>Contact Us</a>
+            <Link to={'/contact-us'} className='mr-28 h-6 font-normal text-base '>Contact Us</Link>
             <div className='mr-32 drop-shadow-lg rounded-lg bg-primary'>
                 <Link to={'/login'}>
                     <button className='left-3.5 top-2.5 grow font-medium px-4 py-2.5 text-base text-lg
