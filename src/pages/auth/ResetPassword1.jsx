@@ -18,7 +18,7 @@ const ResetPassword1 = () => {
                     <InputField type={'text'} id={'email'} name={'email'} placeholder={'Email'} />
                     <InputField type={'text'} id={'verification_code'} name={'verification_code'} placeholder={'Verification Code'} />
                     <div className='py-3.5'>
-                        <Link to={'reset-password'}>
+                        <Link to={'/reset-password'}>
                             <Button value={'Next'} />
                         </Link>
                     </div>

@@ -19,7 +19,7 @@ const Login = () => {
           <InputField type={'email'} id={'email'} name={'email'} placeholder={'Enter your email'}/>
           <InputField type={'password'} id={'password'} name={'password'} placeholder={'Enter your password'}/>
           <div className='flex justify-end mb-3'>
-            <a href='#' tag={Link} to={'verification'} className='text-secondary font-medium'>Forgot your password?</a>
+            <Link to={'/verification'} className='text-secondary font-medium'>Forgot your password?</Link>
           </div>
           <Link to={'/'}>
             <Button value={'Sign In'}/>
