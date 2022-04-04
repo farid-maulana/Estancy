@@ -4,21 +4,16 @@ module.exports = {
   ],
   theme: {
     extend: {
-      lineHeight: {
-        'extra-loose': '64px',
-      }
+      colors: {
+        'primary': '#6078F8',
+        'primary-300': '#DFEDFF',
+        'primary-100': '#E9EFF6',
+        'secondary': '#F48280',
+      },
+      fontFamily: {
+        'Poppins': 'Poppins'
+      },
     },
-    colors: {
-      'primary': '#6078F8',
-      'white': '#FFFFFF',
-      'secondary': '#E35500',
-      'green': '#00A171',
-      'black': '#000000',
-      'primary-100': '#E9EFF6',
-    },
-    fontFamilly: {
-      'fontPoppins': 'Poppins'
-    }
   },
   plugins: [],
 }
