@@ -13,6 +13,10 @@ module.exports = {
       fontFamily: {
         'Poppins': 'Poppins'
       },
+      scale: {
+        '101': '1.01',
+        '102': '1.02',
+      }
     },
   },
   plugins: [],
