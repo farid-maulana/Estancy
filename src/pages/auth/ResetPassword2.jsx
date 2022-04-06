@@ -1,7 +1,7 @@
 import React from 'react'
 import InputField from '../../components/InputField'
 import Button from '../../components/Button'
-import IconButton from '../../components/IconButton'
+import { Link } from 'react-router-dom'
 
 const ResetPassword2 = () => {
     return (
@@ -17,7 +17,9 @@ const ResetPassword2 = () => {
                     <p className='text-base mb-3 font-normal text-base'>Create a new password</p>
                     <InputField type={'password'} id={'password'} name={'password'} placeholder={'Password'} />
                     <InputField type={'password'} id={'password'} name={'password'} placeholder={'Confirm Password'} />
-                    <Button value={'Reset Password'} />
+                    <Link to={'/'}>
+                        <Button value={'Reset Password'} />
+                    </Link>
                 </div>
             </div>
         </div>
