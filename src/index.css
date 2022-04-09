@@ -2,10 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 
 @layer base {
   html {
     font-family: 'Poppins'
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply rounded-lg shadow-md bg-gradient-to-r from-primary to-[#846BE4] text-white text-xs font-medium tracking-wide capitalize py-2.5 px-5 mb-6 items-end hover:shadow-lg hover:scale-101 active:opacity-90 transition;
+  }
+
+  .form-select {
+    @apply w-full h-10 bg-white border rounded-md py-2 px-4 mt-1 font-thin text-sm focus:outline-none focus:border-primary
+  }
+
+  .form-control {
+    @apply w-full border rounded-md py-2 px-4 mt-1 font-thin text-sm focus:outline-none focus:border-primary
   }
 }

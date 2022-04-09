@@ -19,7 +19,7 @@ const Login = () => {
             <input type="email" id='email' name='email' placeholder='Enter your email' className='w-full bg-primary-100 text-slate-700 font-thin p-3 rounded-lg focus:outline-none focus:ring-primary focus:ring-1 focus:border-primary mb-4 text-sm' />
             <input type="password" id='password' name='password' placeholder='Enter your password' className='w-full bg-primary-100 text-slate-700 font-thin p-3 rounded-lg focus:outline-none focus:ring-primary focus:ring-1 focus:border-primary mb-1 text-sm' />
             <Link to={'/verification'} className='block text-secondary text-xs md:text-sm text-right mb-6 hover:font-medium'>Forgot your password?</Link>
-            <Link to={'/'}>
+            <Link to={'/listed-properties'}>
               <button type='submit' className='w-full rounded-lg shadow-md bg-gradient-to-r from-primary to-[#846BE4] text-white text-sm font-medium tracking-wide uppercase p-3 mb-4 hover:shadow-lg hover:scale-101 active:opacity-90 transition'>
                 Sign in
               </button>

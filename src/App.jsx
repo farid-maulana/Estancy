@@ -7,6 +7,9 @@ import AboutUs from './pages/client/AboutUs'
 import ResetPassword1 from './pages/auth/ResetPassword1';
 import ResetPassword2 from './pages/auth/ResetPassword2';
 import ContactUs from './pages/client/ContactUs';
+import Properties from './pages/admin/property/Properties';
+import CreateProperty from './pages/admin/property/CreateProperty';
+import EditProperty from './pages/admin/property/EditProperty';
 
 function App() {
   return (
@@ -19,6 +22,9 @@ function App() {
         <Route path='/' element={<Home/>}/>
         <Route path='/about-us' element={<AboutUs/>}/>
         <Route path='/contact-us' element={<ContactUs/>}/>
+        <Route path='/listed-properties' element={<Properties/>}></Route>
+        <Route path='/create-property' element={<CreateProperty/>}></Route>
+        <Route path='/edit-property' element={<EditProperty/>}></Route>
       </Routes>
     </BrowserRouter>
   );
