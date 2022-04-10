@@ -53,10 +53,10 @@ const navigate = useNavigate()
               </Link>
             </li>
             <li className='w-full py-3 px-3 rounded-tl-lg rounded-bl-lg text-slate-600 mb-3 hover:bg-slate-50'>
-              <a href="::javascript">
+              <Link to={'/listed-customers'}>
                 <FontAwesomeIcon icon={faUsers} />
                 <span className='ml-2 font-medium text-sm'>Customers</span>
-              </a>
+              </Link>
             </li>
             <li className='w-full py-3 px-3 rounded-tl-lg rounded-bl-lg hover:bg-slate-50'>
               <a href="::javascript">

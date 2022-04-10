@@ -63,10 +63,10 @@ const Customers = () => {
               </a>
             </li>
             <li className='w-full py-3 px-3 rounded-tl-lg rounded-bl-lg text-slate-600 mb-3 hover:bg-slate-50'>
-              <a href="::javascript">
+              <Link to={'/listed-transactions'}>
                 <FontAwesomeIcon icon={faCreditCard} />
                 <span className='ml-2 font-medium text-sm'>Transactions</span>
-              </a>
+              </Link>
             </li>
           </ul>
         </aside>
