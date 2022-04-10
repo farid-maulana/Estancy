@@ -10,6 +10,9 @@ import ContactUs from './pages/client/ContactUs';
 import Properties from './pages/admin/property/Properties';
 import CreateProperty from './pages/admin/property/CreateProperty';
 import EditProperty from './pages/admin/property/EditProperty';
+import Customers from './pages/admin/customer/Customers';
+import CreateCustomer from './pages/admin/customer/CreateCustomer';
+import EditCustomer from './pages/admin/customer/EditCustomer';
 
 function App() {
   return (
@@ -25,6 +28,9 @@ function App() {
         <Route path='/listed-properties' element={<Properties/>}></Route>
         <Route path='/create-property' element={<CreateProperty/>}></Route>
         <Route path='/edit-property' element={<EditProperty/>}></Route>
+        <Route path='/listed-customers' element={<Customers/>}></Route>
+        <Route path='/create-customer' element={<CreateCustomer/>}></Route>
+        <Route path='/edit-customer' element={<EditCustomer/>}></Route>
       </Routes>
     </BrowserRouter>
   );
