@@ -10,9 +10,9 @@ import ContactUs from './pages/client/ContactUs';
 import Properties from './pages/admin/property/Properties';
 import CreateProperty from './pages/admin/property/CreateProperty';
 import EditProperty from './pages/admin/property/EditProperty';
-import Transaction from './pages/admin/Transaction/Transactions'
-import CreateTransaction from './pages/admin/Transaction/CreateTransactions'
-import EditTransaction from './pages/admin/Transaction/EditTransactions'
+import Transaction from './pages/admin/transaction/Transactions'
+import CreateTransaction from './pages/admin/transaction/CreateTransactions'
+import EditTransaction from './pages/admin/transaction/EditTransactions'
 import Customers from './pages/admin/customer/Customers';
 import CreateCustomer from './pages/admin/customer/CreateCustomer';
 import EditCustomer from './pages/admin/customer/EditCustomer';

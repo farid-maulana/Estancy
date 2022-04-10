@@ -6,36 +6,36 @@ import Navbar from '../../../components/admin/Navbar'
 import InputField from '../../../components/admin/InputField'
 
 const EditTransaction = () => {
-  const apiURL = "http://localhost:3001/properties/"
+  const apiURL = "http://localhost:3001/transactions/"
   const { state } = useLocation()
   const navigate = useNavigate()
 
-  const [property, setProperty] = useState(state)
+  const [transaction, setTransaction] = useState(state)
 
   useEffect(
     () => {
-      setProperty(state)
+      setTransaction(state)
     },
     [state]
   )
 
   const inputChangeHandler = (event) => {
     const { name, value } = event.target
-    setProperty({ ...property, [name]: value })
-    console.log(property)
+    setTransaction({ ...transaction, [name]: value })
+    console.log(transaction)
   }
 
   const editDataHandler = () => {
-    fetch(apiURL + property.id, {
+    fetch(apiURL + transaction.id, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(property),
+      body: JSON.stringify(transaction),
     })
       .then(response => response.json())
       .then(() => {
-        navigate('/listed-properties')
+        navigate('/listed-transactions')
       })
   }
 
@@ -81,43 +81,24 @@ const EditTransaction = () => {
         <section className='mt-16 mb-16 w-full'>
           <div className='p-6'>
             <div className='bg-white rounded-lg p-6'>
-              <h3 className='text-lg font-medium mb-1'>Edit Property</h3>
-              <p className='text-xs font-thin text-slate-400 mb-8'>Fill this form to edit your property</p>
-              <InputField type={'text'} id={'name'} name={'name'} title={'Property name'} value={property.name} onChange={inputChangeHandler} />
-              <InputField type={'text'} id={'location'} name={'location'} title={'Location'} value={property.location} onChange={inputChangeHandler} />
-              <div className='w-full mb-6'>
-                <label htmlFor='description' className='text-sm'>Description</label>
-                <textarea id='description' name='description' className='form-control resize-none h-20' onChange={inputChangeHandler}>{property.description}</textarea>
-              </div>
-              <div className='grid gap-x-8 grid-cols-2'>
-                <InputField type={'number'} id={'surface_area'} name={'surface_area'} title={'Surface area (m²)'} value={property.surface_area} onChange={inputChangeHandler} />
-                <InputField type={'number'} id={'building_area'} name={'building_area'} title={'Building area (m²)'} value={property.building_area} onChange={inputChangeHandler} />
-              </div>
-              <InputField type={'number'} id={'price'} name={'price'} title={'Price'} value={property.price} onChange={inputChangeHandler} />
+              <h3 className='text-lg font-medium mb-1'>Edit Transaction</h3>
+              <p className='text-xs font-thin text-slate-400 mb-8'>Fill this form to edit your transaction</p>
               <div className='grid gap-x-8 grid-cols-2 mb-6'>
                 <div className='w-full mr-4'>
-                  <label htmlFor='condition' className='text-sm'>Condition</label>
-                  <select name="condition" id="condition" className='form-select' value={property.condition} onChange={inputChangeHandler}>
-                    <option selected disabled>Choose...</option>
-                    <option value="very good">Very Good</option>
-                    <option value="good">Good</option>
-                    <option value="not bad">Not Bad</option>
-                    <option value="broken">Broken</option>
+                  <label htmlFor='customerId' className='text-sm'>Customer Id</label>
+                  <select name="customerId" id="customerId" className='form-select' value={transaction.customerId} onChange={inputChangeHandler}>
+                    <option value="" selected disabled>Choose...</option>
+                    <option value="1212">1212</option>
+                    <option value="1213">1213</option>
+                    <option value="1314">1314</option>
+                    <option value="1415">1415</option>
                   </select>
                 </div>
-                <InputField type={'number'} id={'building_age'} name={'building_age'} title={'Building age (year)'} value={property.building_age} onChange={inputChangeHandler} />
+                <InputField type={'text'} id={'transactionId'} name={'transactionId'} title={'Transaction Id'} value={transaction.transactionId} onChange={inputChangeHandler} />
               </div>
-              <div className='grid gap-x-8 grid-cols-3 mb-6'>
-                <InputField type={'number'} id={'bedroom'} name={'bedroom'} title={'Bedroom count'} value={property.bedroom} onChange={inputChangeHandler} />
-                <InputField type={'number'} id={'bathroom'} name={'bathroom'} title={'Bathroom count'} value={property.bathroom} onChange={inputChangeHandler} />
-                <div className='w-full'>
-                  <label htmlFor='private_pool' className='text-sm'>Private pool</label>
-                  <select name="private_pool" id="private_pool" className='form-select' value={property.private_pool} onChange={inputChangeHandler}>
-                    <option selected disabled>Choose...</option>
-                    <option value="available">Available</option>
-                    <option value="not available">Not Available</option>
-                  </select>
-                </div>
+              <div className='grid gap-x-8 grid-cols-2 mb-6'>
+              <InputField type={'date'} id={'startDate'} name={'startDate'} title={'Start Date'} value={transaction.startDate} onChange={inputChangeHandler} />
+                <InputField type={'date'} id={'endDate'} name={'endDate'} title={'End Date'} value={transaction.endDate} onChange={inputChangeHandler} />
               </div>
               <div className='flex justify-left mb-6'>
                 <Link to={'/listed-properties'}>

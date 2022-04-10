@@ -14,12 +14,12 @@ const Transaction = () => {
   const getAllDataHandler = () => {
     fetch(apiURL)
       .then(response => response.json())
-      .then(property => setTransactions(property))
+      .then(transaction => setTransactions(transaction))
   }
 
   const updateDataHandler = (data) => {
     setTransactions(data)
-    navigate('/edit-property', {state: data})
+    navigate('/edit-transactions', {state: data})
   }
 
   const deleteDataHandler = (id) => {
@@ -105,8 +105,8 @@ const Transaction = () => {
                             transactionId={transaction.transactionId}
                             startDate={transaction.startDate}
                             endDate={transaction.endDate}
-                            deleteProperty={deleteDataHandler}
-                            updateProperty={updateDataHandler} />
+                            deleteTransaction={deleteDataHandler}
+                            updateTransaction={updateDataHandler} />
                         })
                       }
                     </tbody>
