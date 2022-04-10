@@ -1,48 +1,44 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCreditCard, faHandshakeAngle, faHome, faUsers } from '@fortawesome/free-solid-svg-icons'
-import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import Navbar from '../../../components/admin/Navbar'
 import InputField from '../../../components/admin/InputField'
 
-const CreateProperty = () => {
-const apiURL = "http://localhost:3001/properties/"
-const navigate = useNavigate()
-  const [property, setProperty] = useState({
-    newProperty: {
-      name: "",
-      location: "",
-      description: "",
-      surface_area: 1,
-      building_area: 1,
-      price: 1,
-      condition: "",
-      building_age: 1,
-      bedroom: 1,
-      bathroom: 1,
-      private_pool: "",
+const EditTransaction = () => {
+  const apiURL = "http://localhost:3001/properties/"
+  const { state } = useLocation()
+  const navigate = useNavigate()
+
+  const [property, setProperty] = useState(state)
+
+  useEffect(
+    () => {
+      setProperty(state)
     },
-  })
+    [state]
+  )
 
   const inputChangeHandler = (event) => {
     const { name, value } = event.target
-    setProperty({ ...property, [name]: value})
+    setProperty({ ...property, [name]: value })
+    console.log(property)
   }
 
-  const createDataHandler = () => {
-    fetch(apiURL, {
-      method: 'POST', // or 'PUT'
+  const editDataHandler = () => {
+    fetch(apiURL + property.id, {
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(property),
     })
-    .then(response => response.json())
-    .then(() => {
-      navigate('/listed-properties')
-    })
+      .then(response => response.json())
+      .then(() => {
+        navigate('/listed-properties')
+      })
   }
-  
+
   return (
     <div className='container-xl flex bg-[#f8f8f8] overflow-hidden min-h-screen'>
       {/* Navbar Section */}
@@ -53,7 +49,7 @@ const navigate = useNavigate()
         {/* Sidebar Section */}
         <aside className='z-10 mt-16 w-72 bg-white border-t shadow-md hidden lg:block'>
           <ul className='mt-6 ml-3 list-none mb-16'>
-            <li className='bg-slate-50 w-full py-3 px-3 rounded-tl-lg rounded-bl-lg text-primary mb-4'>
+            <li className='w-full py-3 px-3 rounded-tl-lg rounded-bl-lg hover:bg-slate-50 mb-3'>
               <Link to={'/listed-properties'}>
                 <FontAwesomeIcon icon={faHome} />
                 <span className='ml-2 font-medium text-sm'>Properties</span>
@@ -71,7 +67,7 @@ const navigate = useNavigate()
                 <span className='ml-2 font-medium text-sm'>Negotiations</span>
               </a>
             </li>
-            <li className='w-full py-3 px-3 rounded-tl-lg rounded-bl-lg text-slate-600 mb-3 hover:bg-slate-50'>
+            <li className='bg-slate-50 w-full py-3 px-3 rounded-tl-lg rounded-bl-lg text-primary mb-4' >
               <Link to={'/listed-transactions'}>
                 <FontAwesomeIcon icon={faCreditCard} />
                 <span className='ml-2 font-medium text-sm'>Transactions</span>
@@ -85,13 +81,13 @@ const navigate = useNavigate()
         <section className='mt-16 mb-16 w-full'>
           <div className='p-6'>
             <div className='bg-white rounded-lg p-6'>
-              <h3 className='text-lg font-medium mb-1'>Add New Property</h3>
-              <p className='text-xs font-thin text-slate-400 mb-8'>Fill this form to register your new property</p>
+              <h3 className='text-lg font-medium mb-1'>Edit Property</h3>
+              <p className='text-xs font-thin text-slate-400 mb-8'>Fill this form to edit your property</p>
               <InputField type={'text'} id={'name'} name={'name'} title={'Property name'} value={property.name} onChange={inputChangeHandler} />
               <InputField type={'text'} id={'location'} name={'location'} title={'Location'} value={property.location} onChange={inputChangeHandler} />
               <div className='w-full mb-6'>
                 <label htmlFor='description' className='text-sm'>Description</label>
-                <textarea id='description' name='description' className='w-full border rounded-md py-2 px-4 mt-1 font-thin text-sm resize-none h-20 focus:outline-none focus:border-primary' onChange={inputChangeHandler}>{property.description}</textarea>
+                <textarea id='description' name='description' className='form-control resize-none h-20' onChange={inputChangeHandler}>{property.description}</textarea>
               </div>
               <div className='grid gap-x-8 grid-cols-2'>
                 <InputField type={'number'} id={'surface_area'} name={'surface_area'} title={'Surface area (m²)'} value={property.surface_area} onChange={inputChangeHandler} />
@@ -102,7 +98,7 @@ const navigate = useNavigate()
                 <div className='w-full mr-4'>
                   <label htmlFor='condition' className='text-sm'>Condition</label>
                   <select name="condition" id="condition" className='form-select' value={property.condition} onChange={inputChangeHandler}>
-                    <option value="" selected disabled>Choose...</option>
+                    <option selected disabled>Choose...</option>
                     <option value="very good">Very Good</option>
                     <option value="good">Good</option>
                     <option value="not bad">Not Bad</option>
@@ -117,7 +113,7 @@ const navigate = useNavigate()
                 <div className='w-full'>
                   <label htmlFor='private_pool' className='text-sm'>Private pool</label>
                   <select name="private_pool" id="private_pool" className='form-select' value={property.private_pool} onChange={inputChangeHandler}>
-                    <option value="" selected disabled>Choose...</option>
+                    <option selected disabled>Choose...</option>
                     <option value="available">Available</option>
                     <option value="not available">Not Available</option>
                   </select>
@@ -129,7 +125,7 @@ const navigate = useNavigate()
                     Cancel
                   </button>
                 </Link>
-                <button type='submit' className='btn-primary' onClick={createDataHandler}>
+                <button type='submit' className='btn-primary' onClick={editDataHandler}>
                   Submit
                 </button>
               </div>
@@ -142,4 +138,4 @@ const navigate = useNavigate()
   )
 }
 
-export default CreateProperty
+export default EditTransaction
