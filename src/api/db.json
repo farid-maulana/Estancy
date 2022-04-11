@@ -1,0 +1,120 @@
+{
+  "properties": [
+    {
+      "id": 1,
+      "name": "Villa Pertama",
+      "location": "Jl. Villa Pertama No. 1",
+      "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quos harum nemo velit sint molestiae quis laboriosam nobis cum libero sunt neque, quibusdam doloremque fugit nihil ut adipisci possimus! Aperiam sapiente, qui ducimus sunt deserunt sint quibusdam, nulla odio omnis autem reprehenderit perspiciatis voluptate est, tempore quisquam! Id veritatis molestias impedit",
+      "surface_area": 20,
+      "building_area": 17,
+      "price": 2459000,
+      "condition": "good",
+      "building_age": 2014,
+      "bedroom": 4,
+      "bathroom": 3,
+      "private_pool": "available",
+      "status": "available"
+    },
+    {
+      "newProperty": {
+        "name": "",
+        "location": "",
+        "description": "",
+        "surface_area": 1,
+        "building_area": 1,
+        "price": 1,
+        "condition": "",
+        "building_age": 1,
+        "bedroom": 1,
+        "bathroom": 1,
+        "private_pool": ""
+      },
+      "name": "Villa Ketiga",
+      "location": "Jl. Villa Ketiga No. 3",
+      "description": "One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He lay on his armour-like back, and if he lifted his head a little he could see his brown belly, slightly domed and divided by arches into stiff sections. The bedding was hardly able to cover it and seemed ready to slide off any moment. His many legs, pitifully thin compared with the size of the rest of him, waved about helplessly as he looked. \"What's happened to me?\" he thought. It wasn't a dream. His room, a proper human",
+      "surface_area": "15",
+      "building_area": "12",
+      "price": "1899000",
+      "condition": "good",
+      "building_age": "5",
+      "bedroom": "4",
+      "bathroom": "3",
+      "private_pool": "available",
+      "id": 3
+    },
+    {
+      "newProperty": {
+        "name": "",
+        "location": "",
+        "description": "",
+        "surface_area": 1,
+        "building_area": 1,
+        "price": 1,
+        "condition": "",
+        "building_age": 1,
+        "bedroom": 1,
+        "bathroom": 1,
+        "private_pool": ""
+      },
+      "name": "Villa Keempat edited",
+      "location": "Jl. Villa Keempat No. 4, Malang",
+      "description": "Ini adalah deskripsi dari villa keempat",
+      "surface_area": "15",
+      "building_area": "14",
+      "price": "1499000",
+      "condition": "good",
+      "building_age": "4",
+      "bedroom": "3",
+      "bathroom": "1",
+      "private_pool": "not available",
+      "id": 4
+    },
+    {
+      "newProperty": {
+        "name": "",
+        "location": "",
+        "description": "",
+        "surface_area": 1,
+        "building_area": 1,
+        "price": 1,
+        "condition": "",
+        "building_age": 1,
+        "bedroom": 1,
+        "bathroom": 1,
+        "private_pool": ""
+      },
+      "name": "Villa",
+      "location": "malang",
+      "description": "asfads",
+      "surface_area": "12",
+      "building_area": "12",
+      "price": "1341",
+      "condition": "not bad",
+      "building_age": "23",
+      "bedroom": "2",
+      "bathroom": "2",
+      "private_pool": "not available",
+      "id": 5
+    }
+  ],
+  "customers": [
+    {
+      "id": 1,
+      "name": "Nabila Senja",
+      "email": "1941720134@student.polinema.ac.id",
+      "phone_number": "081334678756"
+    },
+    {
+      "newCustomer": {
+        "name": "",
+        "email": "",
+        "phone_number": ""
+      },
+      "name": "Farid Maulana",
+      "email": "farid@mail.com",
+      "phone_number": "08923647232",
+      "id": 3
+    }
+  ],
+  "transactions": []
+}
