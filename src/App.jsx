@@ -10,8 +10,8 @@ import ContactUs from './pages/client/ContactUs';
 import Properties from './pages/admin/property/Properties';
 import CreateProperty from './pages/admin/property/CreateProperty';
 import EditProperty from './pages/admin/property/EditProperty';
-import Transaction from './pages/admin/transaction/Transactions'
-import CreateTransaction from './pages/admin/transaction/CreateTransactions'
+import Transactions from './pages/admin/transaction/Transactions'
+import CreateTransaction from './pages/admin/transaction/CreateTransaction'
 import EditTransaction from './pages/admin/transaction/EditTransactions'
 import Customers from './pages/admin/customer/Customers';
 import CreateCustomer from './pages/admin/customer/CreateCustomer';
@@ -32,8 +32,7 @@ function App() {
         <Route path='/listed-properties' element={<Properties/>}></Route>
         <Route path='/create-property' element={<CreateProperty/>}></Route>
         <Route path='/edit-property' element={<EditProperty/>}></Route>
-
-        <Route path='/listed-transactions' element={<Transaction/>}></Route>
+        <Route path='/listed-transactions' element={<Transactions/>}></Route>
         <Route path='/create-transactions' element={<CreateTransaction/>}></Route>
         <Route path='/edit-transactions' element={<EditTransaction/>}></Route>
         <Route path='/listed-customers' element={<Customers/>}></Route>

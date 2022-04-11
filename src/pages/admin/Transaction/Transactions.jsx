@@ -6,7 +6,7 @@ import Navbar from '../../../components/admin/Navbar'
 import TransactionTableRow from '../../../components/admin/TransactionTableRow'
 
 
-const Transaction = () => {
+const Transactions = () => {
   const apiURL = "http://localhost:3001/transactions/"
   const navigate = useNavigate()
   const [transactions, setTransactions] = useState(false)
@@ -123,4 +123,4 @@ const Transaction = () => {
   )
 }
 
-export default Transaction
+export default Transactions

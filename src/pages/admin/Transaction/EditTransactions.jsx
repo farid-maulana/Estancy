@@ -101,7 +101,7 @@ const EditTransaction = () => {
                 <InputField type={'date'} id={'endDate'} name={'endDate'} title={'End Date'} value={transaction.endDate} onChange={inputChangeHandler} />
               </div>
               <div className='flex justify-left mb-6'>
-                <Link to={'/listed-properties'}>
+                <Link to={'/listed-transactions'}>
                   <button className='rounded-lg shadow-md border border-primary text-gradient-to-r from-primary to-[#846BE4] text-xs font-medium tracking-wide capitalize py-2.5 px-5 mb-6 mr-4 items-end hover:shadow-lg hover:scale-101 active:opacity-90 transition'>
                     Cancel
                   </button>
