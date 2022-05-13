@@ -1,57 +1,83 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import InputFieldWithLabel from '../../components/auth/InputFieldWithLabel'
+import IconButton from '../../components/auth/IconButton'
 
 const Register = () => {
   return (
-    <div className='container p-10 flex h-screen mx-auto lg:p-10'>
-      <div className='m-auto sm:w-3/5 md:w-3/5 lg:w-full lg:flex lg:justify-between'>
-        <div className='text-center hidden lg:block lg:w-3/5 lg:mr-8 lg:mx-auto'>
-          <img src='img/Illustration.png' alt='Illustration' className='mb-2 scale-90' />
-          <h1 className='font-medium text-5xl mb-3 text-slate-800 tracking-wide'>Estancy</h1>
-          <p className='font-thin text-lg w-3/5 mx-auto text-slate-600'>
-            The shortest distance between paradise and the place you call home
-          </p>
-        </div>
-        <div className='lg:ml-8 lg:w-2/5 lg:m-auto lg:p-8'>
-          <h2 className='font-medium text-xl text-slate-700 mb-2 md:text-2xl'>Sign Up</h2>
-          <p className='font-thin text-slate-500 mb-6 text-sm md:text-md'>Fill out this form to be a part of us</p>
-          <form action="">
-            <input type="name" id='name' name='name' placeholder='Full name' className='w-full bg-primary-100 text-slate-700 font-thin p-3 rounded-lg focus:outline-none focus:ring-primary focus:ring-1 focus:border-primary mb-4 text-sm' />
-            <input type="email" id='email' name='email' placeholder='Email' className='w-full bg-primary-100 text-slate-700 font-thin p-3 rounded-lg focus:outline-none focus:ring-primary focus:ring-1 focus:border-primary mb-4 text-sm' />
-            <input type="password" id='password' name='password' placeholder='Password' className='w-full bg-primary-100 text-slate-700 font-thin p-3 rounded-lg focus:outline-none focus:ring-primary focus:ring-1 focus:border-primary mb-1 text-sm' />
-            <input type="password" id='confirm_password' name='confirm_password' placeholder='Confirm Password' className='w-full bg-primary-100 text-slate-700 font-thin p-3 rounded-lg focus:outline-none focus:ring-primary focus:ring-1 focus:border-primary mb-1 text-sm mt-3'/>
-            <div className='flex justify-start mb-4 mt-3'>
-              <button className='w-6 h-6 bg-primary rounded mr-2 text-white'>✔</button>
-              <p className='text-slate-400 text-sm'>I agree the <a href="#" className='text-secondary text-sm'>Term and Conditions</a></p>
-            </div>
-            <Link to={'/'}>
-              <button type='submit' className='w-full rounded-lg shadow-md bg-gradient-to-r from-primary to-[#846BE4] text-white text-sm font-medium tracking-wide uppercase p-3 mb-4 hover:shadow-lg hover:scale-101 active:opacity-90 transition'>
-                Sign Up
-              </button>
-            </Link>
-            <p className='mb-14 text-center text-slate-400 text-xs md:text-sm lg:text-md'>
-              Already have an account? <Link to={'/login'} className='text-secondary hover:font-medium'>Sign in here!</Link>
-            </p>
-            <div className='flex items-center justify-between'>
-              <hr className='w-1/3 mb-3.5 text-slate-400' />
-              <p className='text-xs font-thin text-slate-400 text-center mb-4 lg:text-sm'>or sign in with</p>
-              <hr className='w-1/3 mb-3.5 text-slate-400' />
-            </div>
-            <div className='flex justify-center sm:mb-10 md:mb-10'>
-              <div className='border rounded-lg w-11 md:w-12 p-1 cursor-pointer shadow-sm hover:shadow-md hover:scale-102 transition'>
-                <img src='img/icons/google.png' alt="Google" />
+    <section>
+      <img src="/img/shapes/pattern-lines-primary.svg" alt="pattern-lines" className="position-absolute opacity-1 start-0" style={{ width: '100%', height: '100vh', objectFit: 'cover' }} />
+      <div className="page-header min-vh-100">
+        <div className="container">
+          <div className="row">
+            <div className="col-xl-6 col-lg-6 col-md-12 d-flex flex-column">
+              <div className="card card-plain">
+                <div className="card-header pb-0 text-left" style={{ backgroundColor: 'transparent' }}>
+                  <h4 className="font-weight-bold">Sign Up</h4>
+                  <p className="mb-0">Fill out this form to be a part of us</p>
+                </div>
+                <div className="card-body pb-3">
+                  <form>
+                    <div className='row'>
+                      <div className='col-lg-6 col-md-6 col-sm-12'>
+                        <InputFieldWithLabel type={'text'} nameId={'name'} label={'Full Name'} />
+                      </div>
+                      <div className='col-lg-6 col-md-6 col-sm-12'>
+                        <InputFieldWithLabel type={'email'} nameId={'email'} label={'Email'} />
+                      </div>
+                    </div>
+                    <div className='row'>
+                      <div className='col-lg-6 col-md-6 col-sm-12'>
+                        <InputFieldWithLabel type={'password'} nameId={'password'} label={'Password'} />
+                      </div>
+                      <div className='col-lg-6 col-md-6 col-sm-12'>
+                        <InputFieldWithLabel type={'password'} nameId={'password_confirmation'} label={'Confirm Password'} />
+                      </div>
+                    </div>
+                    <div className="form-check form-check-info text-left">
+                      <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" defaultChecked />
+                      <label className="form-check-label" htmlFor="flexCheckDefault">
+                        I agree the <Link to={'#'} className="text-primary text-gradient font-weight-bolder">Terms and Conditions</Link>
+                      </label>
+                    </div>
+                    <div className="text-center">
+                      <button type="button" className="btn bg-gradient-primary w-100 mt-4 mb-0">Sign up</button>
+                    </div>
+                  </form>
+                </div>
+                <div className="row px-xl-5 px-sm-4 px-3 mb-4 mt-3">
+                  <div className="mb-3 position-relative text-center">
+                    <p className="text-sm font-weight-bold text-secondary text-border d-inline z-index-2 bg-white px-3">
+                      or sign up with
+                    </p>
+                  </div>
+                  <div className="d-flex justify-content-center">
+                    <IconButton href={'#'} path={'img/icons/google.png'} alt={'Google'} />
+                    <IconButton href={'#'} path={'img/icons/apple.png'} alt={'Apple ID'} />
+                    <IconButton href={'#'} path={'img/icons/facebook.png'} alt={'Facebook'} />
+                  </div>
+                </div>
+                <div className="card-footer text-center pt-0 px-sm-4 px-1">
+                  <p className="mb-4 text-sm mx-auto">
+                    Already have an account?
+                    <Link to={'/login'} className="text-primary text-gradient font-weight-bold"> Sign in</Link>
+                  </p>
+                </div>
               </div>
-              <div className='border rounded-xl w-11 md:w-12 p-1 mx-3 md:mx-4 cursor-pointer shadow-sm hover:shadow-md hover:scale-102 transition'>
-                <img src='img/icons/apple.png' alt="Apple" />
-              </div>
-              <div className='border rounded-xl w-11 md:w-12 p-1 cursor-pointer shadow-sm hover:shadow-md hover:scale-102 transition'>
-                <img src='img/icons/facebook.png' alt="Facebook" />
+            </div>
+            <div className="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 end-0 text-center justify-content-center flex-column">
+              <div className="position-relative h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center">
+                <div className="position-relative">
+                  <img className="w-100 position-relative z-index-2" src="/img/illustrations/illustration.png" alt="chat-img" />
+                </div>
+                <h2 className="mt-5 font-weight-bold">ESTANCY</h2>
+                <p>The shortest distance between paradise and the place you call home</p>
               </div>
             </div>
-          </form>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
   )
 }
 
