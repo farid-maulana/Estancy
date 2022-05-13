@@ -4,8 +4,9 @@ import Login from './pages/auth/Login'
 import Register from './pages/auth/Register'
 import Home from './pages/client/Home'
 import AboutUs from './pages/client/AboutUs'
-import ResetPassword1 from './pages/auth/ResetPassword1';
-import ResetPassword2 from './pages/auth/ResetPassword2';
+import ForgotPassword from './pages/auth/ForgotPassword';
+import VerificationCode from './pages/auth/VerificationCode';
+import ResetPassword from './pages/auth/ResetPassword';
 import ContactUs from './pages/client/ContactUs';
 import Properties from './pages/admin/property/Properties';
 import CreateProperty from './pages/admin/property/CreateProperty';
@@ -22,10 +23,11 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/login' element={<Login/>}/>
-        <Route path='/register' element={<Register/>}/>
-        <Route path='/verification' element={<ResetPassword1/>}/>
-        <Route path='/reset-password' element={<ResetPassword2/>}/>
+        <Route path='/login' element={<Login />}/>
+        <Route path='/register' element={<Register />}/>
+        <Route path='/forgot-password' element={<ForgotPassword />}/>
+        <Route path='/verification-code' element={<VerificationCode />}/>
+        <Route path='/reset-password' element={<ResetPassword />}/>
         <Route path='/' element={<Home/>}/>
         <Route path='/about-us' element={<AboutUs/>}/>
         <Route path='/contact-us' element={<ContactUs/>}/>
