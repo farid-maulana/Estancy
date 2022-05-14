@@ -1,39 +1,140 @@
-import { faAngleDown, faBars, faBell, faSearch } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
+import { Link } from 'react-router-dom'
 
-const Navbar = () => {
+const Navbar = ({ activePage }) => {
   return (
-    <nav className='font-normal shadow-sm p-0 fixed top-0 z-20 flex flex-row items-center justify-between w-full h-16 bg-white'>
-      <div className='w-60 text-center items-center justify-center hidden lg:block'>
-        <h1 className='text-xl font-medium tracking-wide'>Estancy</h1>
-      </div>
-      <div className='w-full px-11 flex items-center justify-end'>
-        <button className='rotate-0 transition text-gray-400'>
-          <span><FontAwesomeIcon icon={faBars} /></span>
-        </button>
-        <ul className='items-center flex-row list-none hidden lg:block'>
-          <li className='ml-8'>
-            <form action="" className='relative flex w-full items-stretch border rounded-full'>
-              <input type="text" className='rounded-full py-1.5 px-4 relative flex-auto font-thin focus:outline-none' placeholder='Search something here...' />
-              <div className='ml-2 mr-2 flex'>
-                <button className='text-gray-400'>
-                  <FontAwesomeIcon icon={faSearch} />
-                </button>
-              </div>
-            </form>
-          </li>
-        </ul>
-        <ul className='items-center self-stretch flex flex-row list-none ml-auto'>
-          <li className='ml-4 text-gray-600'>
-            <FontAwesomeIcon icon={faBell} />
-          </li>
-          <li className='ml-8 flex items-center cursor-pointer text-gray-600'>
-            <span className='mr-2'>Administrator</span>
-            <img src={'logo192.png'} className='w-10 h-10 rounded-full mr-2' />
-            <FontAwesomeIcon icon={faAngleDown} />
-          </li>
-        </ul>
+    <nav className="navbar navbar-main navbar-expand-lg position-sticky mt-4 top-1 px-0 mx-4 shadow-none border-radius-xl z-index-sticky" id="navbarBlur" data-scroll="true">
+      <div className="container-fluid py-1 px-3">
+        <nav aria-label="breadcrumb">
+          <ol className="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+            <li className="breadcrumb-item text-sm">
+              <Link to={'#'} className="opacity-3 text-dark">
+                <svg width="12px" height="12px" className="mb-1" viewBox="0 0 45 40" version="1.1">
+                  <title>shop </title>
+                  <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
+                    <g transform="translate(-1716.000000, -439.000000)" fill="#252f40" fillRule="nonzero">
+                      <g transform="translate(1716.000000, 291.000000)">
+                        <g transform="translate(0.000000, 148.000000)">
+                          <path d="M46.7199583,10.7414583 L40.8449583,0.949791667 C40.4909749,0.360605034 39.8540131,0 39.1666667,0 L7.83333333,0 C7.1459869,0 6.50902508,0.360605034 6.15504167,0.949791667 L0.280041667,10.7414583 C0.0969176761,11.0460037 -1.23209662e-05,11.3946378 -1.23209662e-05,11.75 C-0.00758042603,16.0663731 3.48367543,19.5725301 7.80004167,19.5833333 L7.81570833,19.5833333 C9.75003686,19.5882688 11.6168794,18.8726691 13.0522917,17.5760417 C16.0171492,20.2556967 20.5292675,20.2556967 23.494125,17.5760417 C26.4604562,20.2616016 30.9794188,20.2616016 33.94575,17.5760417 C36.2421905,19.6477597 39.5441143,20.1708521 42.3684437,18.9103691 C45.1927731,17.649886 47.0084685,14.8428276 47.0000295,11.75 C47.0000295,11.3946378 46.9030823,11.0460037 46.7199583,10.7414583 Z"></path>
+                          <path d="M39.198,22.4912623 C37.3776246,22.4928106 35.5817531,22.0149171 33.951625,21.0951667 L33.92225,21.1107282 C31.1430221,22.6838032 27.9255001,22.9318916 24.9844167,21.7998837 C24.4750389,21.605469 23.9777983,21.3722567 23.4960833,21.1018359 L23.4745417,21.1129513 C20.6961809,22.6871153 17.4786145,22.9344611 14.5386667,21.7998837 C14.029926,21.6054643 13.533337,21.3722507 13.0522917,21.1018359 C11.4250962,22.0190609 9.63246555,22.4947009 7.81570833,22.4912623 C7.16510551,22.4842162 6.51607673,22.4173045 5.875,22.2911849 L5.875,44.7220845 C5.875,45.9498589 6.7517757,46.9451667 7.83333333,46.9451667 L19.5833333,46.9451667 L19.5833333,33.6066734 L27.4166667,33.6066734 L27.4166667,46.9451667 L39.1666667,46.9451667 C40.2482243,46.9451667 41.125,45.9498589 41.125,44.7220845 L41.125,22.2822926 C40.4887822,22.4116582 39.8442868,22.4815492 39.198,22.4912623 Z"></path>
+                        </g>
+                      </g>
+                    </g>
+                  </g>
+                </svg>
+              </Link>
+            </li>
+            <li className="breadcrumb-item text-sm text-dark active" aria-current="page">{activePage}</li>
+          </ol>
+          <h6 className="font-weight-bolder mb-0">{activePage}</h6>
+        </nav>
+        <div className="sidenav-toggler sidenav-toggler-inner d-xl-block d-none ">
+          <Link to={'#'} className="nav-link text-body p-0">
+            <div className="sidenav-toggler-inner">
+              <i className="sidenav-toggler-line"></i>
+              <i className="sidenav-toggler-line"></i>
+              <i className="sidenav-toggler-line"></i>
+            </div>
+          </Link>
+        </div>
+        <div className="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+          <div className="ms-md-auto pe-md-3 d-flex align-items-center">
+            <div className="input-group">
+              <span className="input-group-text text-body"><i className="fas fa-search" aria-hidden="true"></i></span>
+              <input type="text" className="form-control" placeholder="Type here..." />
+            </div>
+          </div>
+          <ul className="navbar-nav justify-content-end">
+            <li className="nav-item d-flex align-items-center">
+              <Link to={'/login'} className="nav-link text-body font-weight-bold px-0" target="_blank">
+                <i className="fa fa-user me-sm-1"></i>
+                <span className="d-sm-inline d-none">Sign In</span>
+              </Link>
+            </li>
+            <li className="nav-item d-xl-none ps-3 d-flex align-items-center">
+              <Link to={'#'} className="nav-link text-body p-0" id="iconNavbarSidenav">
+                <div className="sidenav-toggler-inner">
+                  <i className="sidenav-toggler-line"></i>
+                  <i className="sidenav-toggler-line"></i>
+                  <i className="sidenav-toggler-line"></i>
+                </div>
+              </Link>
+            </li>
+            <li className="nav-item dropdown ps-3 pe-2 d-flex align-items-center">
+              <Link to={'#'} className="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                <i className="fa fa-bell cursor-pointer"></i>
+              </Link>
+              <ul className="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
+                <li className="mb-2">
+                  <Link to={'#'} className="dropdown-item border-radius-md">
+                    <div className="d-flex py-1">
+                      <div className="my-auto">
+                        <img src="/img/team-2.jpg" className="avatar avatar-sm  me-3" alt="user" />
+                      </div>
+                      <div className="d-flex flex-column justify-content-center">
+                        <h6 className="text-sm font-weight-normal mb-1">
+                          <span className="font-weight-bold">New message</span> from Laur
+                        </h6>
+                        <p className="text-xs text-secondary mb-0">
+                          <i className="fa fa-clock me-1"></i>
+                          13 minutes ago
+                        </p>
+                      </div>
+                    </div>
+                  </Link>
+                </li>
+                <li className="mb-2">
+                  <Link to={'#'} className="dropdown-item border-radius-md">
+                    <div className="d-flex py-1">
+                      <div className="my-auto">
+                        <img src="/img/small-logos/logo-spotify.svg" className="avatar avatar-sm bg-gradient-dark  me-3 " alt="logo spotify" />
+                      </div>
+                      <div className="d-flex flex-column justify-content-center">
+                        <h6 className="text-sm font-weight-normal mb-1">
+                          <span className="font-weight-bold">New album</span> by Travis Scott
+                        </h6>
+                        <p className="text-xs text-secondary mb-0">
+                          <i className="fa fa-clock me-1"></i>
+                          1 day
+                        </p>
+                      </div>
+                    </div>
+                  </Link>
+                </li>
+                <li>
+                  <Link to={'#'} className="dropdown-item border-radius-md">
+                    <div className="d-flex py-1">
+                      <div className="avatar avatar-sm bg-gradient-secondary  me-3  my-auto">
+                        <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1">
+                          <title>credit-card</title>
+                          <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
+                            <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF" fillRule="nonzero">
+                              <g transform="translate(1716.000000, 291.000000)">
+                                <g transform="translate(453.000000, 454.000000)">
+                                  <path className="color-background" d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z" opacity="0.593633743"></path>
+                                  <path className="color-background" d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z"></path>
+                                </g>
+                              </g>
+                            </g>
+                          </g>
+                        </svg>
+                      </div>
+                      <div className="d-flex flex-column justify-content-center">
+                        <h6 className="text-sm font-weight-normal mb-1">
+                          Payment successfully completed
+                        </h6>
+                        <p className="text-xs text-secondary mb-0">
+                          <i className="fa fa-clock me-1"></i>
+                          2 days
+                        </p>
+                      </div>
+                    </div>
+                  </Link>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
       </div>
     </nav>
   )

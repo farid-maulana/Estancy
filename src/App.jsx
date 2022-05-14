@@ -17,6 +17,7 @@ import EditTransaction from './pages/admin/transaction/EditTransactions'
 import Customers from './pages/admin/customer/Customers';
 import CreateCustomer from './pages/admin/customer/CreateCustomer';
 import EditCustomer from './pages/admin/customer/EditCustomer';
+import Dashboard from './pages/admin/Dashboard';
 
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
         <Route path='/listed-customers' element={<Customers/>}></Route>
         <Route path='/create-customer' element={<CreateCustomer/>}></Route>
         <Route path='/edit-customer' element={<EditCustomer/>}></Route>
+        <Route path='/dashboard' element={<Dashboard />} />
       </Routes>
     </BrowserRouter>
   );
