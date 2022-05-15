@@ -8,15 +8,6 @@ import ForgotPassword from './pages/auth/ForgotPassword';
 import VerificationCode from './pages/auth/VerificationCode';
 import ResetPassword from './pages/auth/ResetPassword';
 import ContactUs from './pages/client/ContactUs';
-import Properties from './pages/admin/property/Properties';
-import CreateProperty from './pages/admin/property/CreateProperty';
-import EditProperty from './pages/admin/property/EditProperty';
-import Transactions from './pages/admin/transaction/Transactions'
-import CreateTransaction from './pages/admin/transaction/CreateTransaction'
-import EditTransaction from './pages/admin/transaction/EditTransactions'
-import Customers from './pages/admin/customer/Customers';
-import CreateCustomer from './pages/admin/customer/CreateCustomer';
-import EditCustomer from './pages/admin/customer/EditCustomer';
 import Dashboard from './pages/admin/Dashboard';
 
 
@@ -29,18 +20,9 @@ function App() {
         <Route path='/forgot-password' element={<ForgotPassword />}/>
         <Route path='/verification-code' element={<VerificationCode />}/>
         <Route path='/reset-password' element={<ResetPassword />}/>
-        <Route path='/' element={<Home/>}/>
+        <Route path='/' element={<Home />}/>
         <Route path='/about-us' element={<AboutUs/>}/>
         <Route path='/contact-us' element={<ContactUs/>}/>
-        <Route path='/listed-properties' element={<Properties/>}></Route>
-        <Route path='/create-property' element={<CreateProperty/>}></Route>
-        <Route path='/edit-property' element={<EditProperty/>}></Route>
-        <Route path='/listed-transactions' element={<Transactions/>}></Route>
-        <Route path='/create-transactions' element={<CreateTransaction/>}></Route>
-        <Route path='/edit-transactions' element={<EditTransaction/>}></Route>
-        <Route path='/listed-customers' element={<Customers/>}></Route>
-        <Route path='/create-customer' element={<CreateCustomer/>}></Route>
-        <Route path='/edit-customer' element={<EditCustomer/>}></Route>
         <Route path='/dashboard' element={<Dashboard />} />
       </Routes>
     </BrowserRouter>
