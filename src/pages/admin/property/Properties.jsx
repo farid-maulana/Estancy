@@ -1,9 +1,9 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCreditCard, faHandshakeAngle, faHome, faPlus, faUsers } from '@fortawesome/free-solid-svg-icons'
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Navbar from '../../../components/admin/Navbar'
-import PropertyTableRow from '../../../components/admin/PropertyTableRow'
+import Sidebar from '../../../components/admin/Sidebar'
+import Footer from '../../../components/admin/Footer'
+import CardProperty from '../../../components/admin/CardProperty'
 
 
 const Properties = () => {
@@ -17,16 +17,9 @@ const Properties = () => {
       .then(property => setProperties(property))
   }
 
-  const updateDataHandler = (data) => {
+  const detailDataHandler = (data) => {
     setProperties(data)
-    navigate('/edit-property', {state: data})
-  }
-
-  const deleteDataHandler = (id) => {
-    fetch(apiURL + id, { method: 'DELETE' })
-      .then(() => {
-        getAllDataHandler()
-      })
+    navigate('/properties/detail', {state: data})
   }
 
   useEffect(() => {
@@ -35,89 +28,64 @@ const Properties = () => {
 
 
   return (
-    <div className='container-xl flex bg-[#f8f8f8] overflow-hidden min-h-screen'>
-      {/* Navbar Section */}
-      <Navbar />
-      {/* End Navbar Section */}
-
-      <div className='min-h-screen w-full flex flex-row'>
-        {/* Sidebar Section */}
-        <aside className='z-10 mt-16 w-72 bg-white border-t shadow-md hidden lg:block'>
-          <ul className='mt-6 ml-3 list-none mb-16'>
-            <li className='bg-slate-50 w-full py-3 px-3 rounded-tl-lg rounded-bl-lg text-primary mb-4'>
-              <Link to={'/listed-properties'}>
-                <FontAwesomeIcon icon={faHome} />
-                <span className='ml-2 font-medium text-sm'>Properties</span>
-              </Link>
-            </li>
-            <li className='w-full py-3 px-3 rounded-tl-lg rounded-bl-lg text-slate-600 mb-3 hover:bg-slate-50'>
-            <Link to={'/listed-customers'}>
-                <FontAwesomeIcon icon={faUsers} />
-                <span className='ml-2 font-medium text-sm'>Customers</span>
-              </Link>
-            </li>
-            <li className='w-full py-3 px-3 rounded-tl-lg rounded-bl-lg text-slate-600 mb-3 hover:bg-slate-50'>
-              <a href="::javascript">
-                <FontAwesomeIcon icon={faHandshakeAngle} />
-                <span className='ml-2 font-medium text-sm'>Negotiations</span>
-              </a>
-            </li>
-            <li className='w-full py-3 px-3 rounded-tl-lg rounded-bl-lg text-slate-600 mb-3 hover:bg-slate-50'>
-              <Link to={'/listed-transactions'}>
-                <FontAwesomeIcon icon={faCreditCard} />
-                <span className='ml-2 font-medium text-sm'>Transactions</span>
-              </Link>
-            </li>
-          </ul>
-        </aside>
-        {/* End Sidebar Section */}
-
-        {/* Content Section */}
-        <section className='mt-16 mb-16 w-full'>
-          <div className='p-6'>
-            <h1 className='font-medium text-xl mb-4'>Listed Properties</h1>
-            <Link to={'/create-property'}>
-              <button className='rounded-lg shadow-md bg-gradient-to-r from-primary to-[#846BE4] text-white text-xs font-medium tracking-wide capitalize py-2.5 px-5 mb-6 items-end hover:shadow-lg hover:scale-101 active:opacity-90 transition'>
-                <FontAwesomeIcon icon={faPlus} /> Add Property
-              </button>
-            </Link>
-            <div className="not-prose relative bg-white rounded-xl overflow-hidden">
-              <div className="relative rounded-xl overflow-auto">
-                <div className="shadow-sm overflow-hidden my-6">
-                  <table className="border-collapse table-fixed w-full text-sm">
-                    <thead>
-                      <tr>
-                        <th className="border-b font-medium p-4 pl-8 pt-0 pb-3 text-slate-400 text-left">Name</th>
-                        <th className="border-b font-medium p-4 pt-0 pb-3 text-slate-400 text-left">Location</th>
-                        <th className="border-b font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 text-left">Price</th>
-                        <th className="border-b font-medium p-4 pt-0 pb-3 text-slate-400 text-left">Action</th>
-                      </tr>
-                    </thead>
-                    <tbody className="bg-white">
-                      {
-                        properties && properties.map((property, index) => {
-                          return <PropertyTableRow
-                            data={property}
-                            key={index}
-                            id={property.id}
-                            name={property.name}
-                            location={property.location}
-                            price={property.price}
-                            deleteProperty={deleteDataHandler}
-                            updateProperty={updateDataHandler} />
-                        })
-                      }
-                    </tbody>
-                  </table>
+    <>
+      <Sidebar />
+      <main className="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+        <Navbar activePage={'Properties'} />
+        <div className="container-fluid py-4">
+          <div className="row">
+            <div className="col-12">
+              <div className="card mb-4">
+                <div className="card-header pb-0 p-3 d-flex justify-content-between">
+                  <div>
+                    <h6 className="mb-1">Listed Properties</h6>
+                    <p className="text-sm">You have {Object.keys(properties).length} properties!</p>
+                  </div>
+                  <div className='d-inline'>
+                    <div className="dropdown d-inline">
+                      <Link to={'#'} className="btn btn-outline-dark dropdown-toggle " data-bs-toggle="dropdown" id="navbarDropdownMenuLink2">
+                        Filters
+                      </Link>
+                      <ul className="dropdown-menu dropdown-menu-lg-start px-2 py-3" aria-labelledby="navbarDropdownMenuLink2" data-popper-placement="left-start">
+                        <li><Link className="dropdown-item border-radius-md" to={'#'}>Status: Available</Link></li>
+                        <li><Link className="dropdown-item border-radius-md" to={'#'}>Status: Unavailable</Link></li>
+                        <li><Link className="dropdown-item border-radius-md" to={'#'}>Status: Archived</Link></li>
+                        <li>
+                          <hr className="horizontal dark my-2" />
+                        </li>
+                        <li><Link className="dropdown-item border-radius-md text-danger" to={'#'}>Remove Filter</Link></li>
+                      </ul>
+                    </div>
+                    <Link to={'/properties/create'} className="btn btn-icon btn-dark ms-2">
+                      <i className="fa fa-plus"></i>
+                      <span className="btn-inner--text"> &nbsp; Add property</span>
+                    </Link>
+                  </div>
                 </div>
-                <p className='text-xs text-slate-400 mb-6 ml-4'>Showing {Object.keys(properties).length} results</p>
+                <div className="card-body p-3">
+                  <div className="row">
+                    {
+                      properties && properties.map((property, index) => {
+                        return <CardProperty 
+                          data={property}
+                          key={index}
+                          id={property.id}
+                          photo={property.photo} 
+                          status={property.status} 
+                          name={property.name} 
+                          address={property.location}
+                          detailProperty={detailDataHandler} />
+                      })
+                    }
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </section>
-        {/* End Content Section */}
-      </div>
-    </div>
+          <Footer />
+        </div>
+      </main>
+    </>
   )
 }
 

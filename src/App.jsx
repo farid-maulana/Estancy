@@ -9,6 +9,10 @@ import VerificationCode from './pages/auth/VerificationCode';
 import ResetPassword from './pages/auth/ResetPassword';
 import ContactUs from './pages/client/ContactUs';
 import Dashboard from './pages/admin/Dashboard';
+import Properties from './pages/admin/property/Properties';
+import PropertyDetail from './pages/admin/property/PropertyDetail';
+import CreateProperty from './pages/admin/property/CreateProperty';
+import EditProperty from './pages/admin/property/EditProperty';
 
 
 function App() {
@@ -24,6 +28,10 @@ function App() {
         <Route path='/about-us' element={<AboutUs/>}/>
         <Route path='/contact-us' element={<ContactUs/>}/>
         <Route path='/dashboard' element={<Dashboard />} />
+        <Route path='/properties' element={<Properties />} />
+        <Route path='/properties/detail' element={<PropertyDetail />} />
+        <Route path='/properties/create' element={<CreateProperty />} />
+        <Route path='/properties/edit' element={<EditProperty />} />
       </Routes>
     </BrowserRouter>
   );

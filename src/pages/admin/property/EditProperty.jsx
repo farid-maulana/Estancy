@@ -1,9 +1,10 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCreditCard, faHandshakeAngle, faHome, faUsers } from '@fortawesome/free-solid-svg-icons'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import Navbar from '../../../components/admin/Navbar'
-import InputField from '../../../components/admin/InputField'
+import Sidebar from '../../../components/admin/Sidebar'
+import InputFieldWithLabel from '../../../components/auth/InputFieldWithLabel'
+import InputSelect from '../../../components/form/InputSelect'
+import Footer from '../../../components/admin/Footer'
 
 const EditProperty = () => {
   const apiURL = "http://localhost:3001/properties/"
@@ -11,13 +12,6 @@ const EditProperty = () => {
   const navigate = useNavigate()
 
   const [property, setProperty] = useState(state)
-
-  useEffect(
-    () => {
-      setProperty(state)
-    },
-    [state]
-  )
 
   const inputChangeHandler = (event) => {
     const { name, value } = event.target
@@ -35,106 +29,79 @@ const EditProperty = () => {
     })
       .then(response => response.json())
       .then(() => {
-        navigate('/listed-properties')
+        navigate('/properties')
       })
   }
 
   return (
-    <div className='container-xl flex bg-[#f8f8f8] overflow-hidden min-h-screen'>
-      {/* Navbar Section */}
-      <Navbar />
-      {/* End Navbar Section */}
-
-      <div className='min-h-screen w-full flex flex-row'>
-        {/* Sidebar Section */}
-        <aside className='z-10 mt-16 w-72 bg-white border-t shadow-md hidden lg:block'>
-          <ul className='mt-6 ml-3 list-none mb-16'>
-            <li className='bg-slate-50 w-full py-3 px-3 rounded-tl-lg rounded-bl-lg text-primary mb-4'>
-              <Link to={'/listed-properties'}>
-                <FontAwesomeIcon icon={faHome} />
-                <span className='ml-2 font-medium text-sm'>Properties</span>
-              </Link>
-            </li>
-            <li className='w-full py-3 px-3 rounded-tl-lg rounded-bl-lg text-slate-600 mb-3 hover:bg-slate-50'>
-              <a href="::javascript">
-                <FontAwesomeIcon icon={faUsers} />
-                <span className='ml-2 font-medium text-sm'>Customers</span>
-              </a>
-            </li>
-            <li className='w-full py-3 px-3 rounded-tl-lg rounded-bl-lg text-slate-600 mb-3 hover:bg-slate-50'>
-              <a href="::javascript">
-                <FontAwesomeIcon icon={faHandshakeAngle} />
-                <span className='ml-2 font-medium text-sm'>Negotiations</span>
-              </a>
-            </li>
-            <li className='w-full py-3 px-3 rounded-tl-lg rounded-bl-lg text-slate-600 mb-3 hover:bg-slate-50'>
-              <Link to={'/listed-transactions'}>
-                <FontAwesomeIcon icon={faCreditCard} />
-                <span className='ml-2 font-medium text-sm'>Transactions</span>
-              </Link>
-            </li>
-          </ul>
-        </aside>
-        {/* End Sidebar Section */}
-
-        {/* Content Section */}
-        <section className='mt-16 mb-16 w-full'>
-          <div className='p-6'>
-            <div className='bg-white rounded-lg p-6'>
-              <h3 className='text-lg font-medium mb-1'>Edit Property</h3>
-              <p className='text-xs font-thin text-slate-400 mb-8'>Fill this form to edit your property</p>
-              <InputField type={'text'} id={'name'} name={'name'} title={'Property name'} value={property.name} onChange={inputChangeHandler} />
-              <InputField type={'text'} id={'location'} name={'location'} title={'Location'} value={property.location} onChange={inputChangeHandler} />
-              <div className='w-full mb-6'>
-                <label htmlFor='description' className='text-sm'>Description</label>
-                <textarea id='description' name='description' className='form-control resize-none h-20' onChange={inputChangeHandler}>{property.description}</textarea>
-              </div>
-              <div className='grid gap-x-8 grid-cols-2'>
-                <InputField type={'number'} id={'surface_area'} name={'surface_area'} title={'Surface area (m²)'} value={property.surface_area} onChange={inputChangeHandler} />
-                <InputField type={'number'} id={'building_area'} name={'building_area'} title={'Building area (m²)'} value={property.building_area} onChange={inputChangeHandler} />
-              </div>
-              <InputField type={'number'} id={'price'} name={'price'} title={'Price'} value={property.price} onChange={inputChangeHandler} />
-              <div className='grid gap-x-8 grid-cols-2 mb-6'>
-                <div className='w-full mr-4'>
-                  <label htmlFor='condition' className='text-sm'>Condition</label>
-                  <select name="condition" id="condition" className='form-select' value={property.condition} onChange={inputChangeHandler}>
-                    <option selected disabled>Choose...</option>
-                    <option value="very good">Very Good</option>
-                    <option value="good">Good</option>
-                    <option value="not bad">Not Bad</option>
-                    <option value="broken">Broken</option>
-                  </select>
+    <>
+      <Sidebar />
+      <main className="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+        <Navbar activePage={'New Property'} />
+        <div className="container-fluid py-4">
+          <div className="row">
+            <div className="col-lg-12 col-12 mx-auto">
+              <div className="card card-body mb-4">
+                <h6 className="mb-0">Edit Property</h6>
+                <p className="text-sm mb-0">Edit property</p>
+                <hr className="horizontal dark my-3" />
+                <InputFieldWithLabel type={'text'} nameId={'name'} label={'Property Name'} value={property.name} onChangeHandler={inputChangeHandler} />
+                <InputFieldWithLabel type={'text'} nameId={'location'} label={'Property Location'} value={property.location} onChangeHandler={inputChangeHandler} />
+                <div className="form-group">
+                  <label htmlFor="propertyDescription" className="form-label">Property Description</label>
+                  <textarea className="form-control" id="description" name="description" onChange={inputChangeHandler}>{property.description}</textarea>
                 </div>
-                <InputField type={'number'} id={'building_age'} name={'building_age'} title={'Building age (year)'} value={property.building_age} onChange={inputChangeHandler} />
-              </div>
-              <div className='grid gap-x-8 grid-cols-3 mb-6'>
-                <InputField type={'number'} id={'bedroom'} name={'bedroom'} title={'Bedroom count'} value={property.bedroom} onChange={inputChangeHandler} />
-                <InputField type={'number'} id={'bathroom'} name={'bathroom'} title={'Bathroom count'} value={property.bathroom} onChange={inputChangeHandler} />
-                <div className='w-full'>
-                  <label htmlFor='private_pool' className='text-sm'>Private pool</label>
-                  <select name="private_pool" id="private_pool" className='form-select' value={property.private_pool} onChange={inputChangeHandler}>
-                    <option selected disabled>Choose...</option>
-                    <option value="available">Available</option>
-                    <option value="not available">Not Available</option>
-                  </select>
+                <InputFieldWithLabel type={'number'} nameId={'price'} label={'Property Price'} value={property.price} onChangeHandler={inputChangeHandler} />
+                <div className="row">
+                  <div className="col-4">
+                    <InputFieldWithLabel type={'number'} nameId={'bedroom'} label={'Bedroom Total'} value={property.bedroom} onChangeHandler={inputChangeHandler} />
+                  </div>
+                  <div className="col-4">
+                    <InputFieldWithLabel type={'number'} nameId={'bathroom'} label={'Bathroom Total'} value={property.bathroom} onChangeHandler={inputChangeHandler} />
+                  </div>
+                  <div className="col-4">
+                    <InputFieldWithLabel type={'number'} nameId={'building_area'} label={'Building Area (m²)'} value={property.building_area} onChangeHandler={inputChangeHandler} />
+                  </div>
+                  <div className="col-4">
+                    <InputSelect label={'Private Pool'} nameId={'private_pool'} options={['available', 'unavailable']} value={property.private_pool} onChangeHandler={inputChangeHandler} />
+                  </div>
+                  <div className="col-4">
+                    <InputSelect label={'Living Room'} nameId={'living_room'} options={['available', 'unavailable']} value={property.living_room} onChangeHandler={inputChangeHandler} />
+                  </div>
+                  <div className="col-4">
+                    <InputSelect label={'Kitchen'} nameId={'kitchen'} options={['available', 'unavailable']} value={property.kitchen} onChangeHandler={inputChangeHandler} />
+                  </div>
+                  <div className="col-4">
+                    <InputSelect label={'Smoking Area'} nameId={'smoking_area'} options={['available', 'unavailable']} value={property.smoking_area} onChangeHandler={inputChangeHandler} />
+                  </div>
+                  <div className="col-4">
+                    <InputSelect label={'Parking Area'} nameId={'parking_area'} options={['available', 'unavailable']} value={property.parking_area} onChangeHandler={inputChangeHandler} />
+                  </div>
+                  <div className="col-4">
+                    <InputSelect label={'Wifi'} nameId={'wifi'} options={['available', 'unavailable']} value={property.wifi} onChangeHandler={inputChangeHandler} />
+                  </div>
+                  <div className="col-4">
+                    <InputSelect label={'Television'} nameId={'television'} options={['available', 'unavailable']} value={property.television} onChangeHandler={inputChangeHandler} />
+                  </div>
+                  <div className="col-4">
+                    <InputSelect label={'Shower'} nameId={'shower'} options={['available', 'unavailable']} value={property.shower} onChangeHandler={inputChangeHandler} />
+                  </div>
+                  <div className="col-4">
+                    <InputSelect label={'Pet'} nameId={'pet'} options={['approved', 'disapproved']} value={property.pet} onChangeHandler={inputChangeHandler} />
+                  </div>
                 </div>
-              </div>
-              <div className='flex justify-left mb-6'>
-                <Link to={'/listed-properties'}>
-                  <button className='rounded-lg shadow-md border border-primary text-gradient-to-r from-primary to-[#846BE4] text-xs font-medium tracking-wide capitalize py-2.5 px-5 mb-6 mr-4 items-end hover:shadow-lg hover:scale-101 active:opacity-90 transition'>
-                    Cancel
-                  </button>
-                </Link>
-                <button type='submit' className='btn-primary' onClick={editDataHandler}>
-                  Submit
-                </button>
+                <InputFieldWithLabel type={'text'} nameId={'photo'} label={'Property Photo'} value={property.photo} onChangeHandler={inputChangeHandler} />
+                <div className="d-flex justify-content-end mb-3">
+                  <Link to={'/properties'} name="button" className="btn btn-light m-0">Cancel</Link>
+                  <button type="button" name="button" className="btn bg-gradient-primary m-0 ms-2" onClick={editDataHandler}>Save Property</button>
+                </div>
               </div>
             </div>
           </div>
-        </section>
-        {/* End Content Section */}
-      </div>
-    </div>
+          <Footer />
+        </div>
+      </main>
+    </>
   )
 }
 
