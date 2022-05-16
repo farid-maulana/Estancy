@@ -13,6 +13,9 @@ import Properties from './pages/admin/property/Properties';
 import PropertyDetail from './pages/admin/property/PropertyDetail';
 import CreateProperty from './pages/admin/property/CreateProperty';
 import EditProperty from './pages/admin/property/EditProperty';
+import Transactions from './pages/admin/transaction/Transactions';
+import CreateTransaction from './pages/admin/transaction/CreateTransaction';
+import EditTransaction from './pages/admin/transaction/EditTransactions'
 
 
 function App() {
@@ -32,6 +35,9 @@ function App() {
         <Route path='/properties/detail' element={<PropertyDetail />} />
         <Route path='/properties/create' element={<CreateProperty />} />
         <Route path='/properties/edit' element={<EditProperty />} />
+        <Route path='/transactions' element={<Transactions />} />
+        <Route path='/transactions/create' element={<CreateTransaction />} />
+        <Route path='/transactions/edit' element={<EditTransaction />} />
       </Routes>
     </BrowserRouter>
   );

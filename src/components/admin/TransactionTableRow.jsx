@@ -1,23 +1,50 @@
-import { faClipboard, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
+import { Link } from 'react-router-dom'
 
-const TransactionTableRow = ({ id,  customerId, transactionId, startDate, endDate, deleteTransaction, updateTransaction, data }) => {
+const TransactionTableRow = ({ data, customerName, customerPhoneNumber, propertyName, propertyAddress, checkIn, checkOut, status, updateTransaction }) => {
   return (
     <tr>
-      <td className="border-b border-slate-100 p-4 pl-8 text-slate-500">{customerId}</td>
-      <td className="border-b border-slate-100 p-4 text-slate-500">{transactionId}</td>
-      <td className="border-b border-slate-100 p-4 pl-8 text-slate-500">{startDate}</td>
-      <td className="border-b border-slate-100 p-4 pl-8 text-slate-500">{endDate}</td>
-      <td className="border-b border-slate-100 p-4 text-slate-500 flex justify-around">
-        <a href="::javascript" className='text-secondary'>
-          <FontAwesomeIcon icon={faClipboard} /> <span className='hidden lg:inline'>Detail</span>
-        </a>
-        <button onClick={() => updateTransaction(data)} className='text-secondary'>
-          <FontAwesomeIcon icon={faEdit} /> <span className='hidden lg:inline'>Edit</span>
-        </button>
-        <button onClick={() => deleteTransaction(id)} className='text-secondary'>
-          <FontAwesomeIcon icon={faTrash} /> <span className='hidden lg:inline'>Delete</span>
+      <td>
+        <div class="d-flex px-2 py-1">
+          <div class="d-flex flex-column justify-content-center">
+            <h6 class="mb-0 text-xs">{customerName}</h6>
+            <p class="text-xs text-secondary mb-0">{customerPhoneNumber}</p>
+          </div>
+        </div>
+      </td>
+      <td>
+        <div class="d-flex px-2 py-1">
+          <div class="d-flex flex-column justify-content-center">
+            <h6 class="mb-0 text-xs">{propertyName}</h6>
+            <p class="text-xs text-secondary mb-0">{propertyAddress}</p>
+          </div>
+        </div>
+      </td>
+      <td class="align-middle text-center">
+        <span class="text-secondary text-xs font-weight-bold">{checkIn}</span>
+      </td>
+      <td class="align-middle text-center">
+        <span class="text-secondary text-xs font-weight-bold">{checkOut}</span>
+      </td>
+      <td class="align-middle text-center text-sm">
+      <span 
+          class={(
+            status === 'active' ? 'badge badge-sm bg-gradient-success' : (
+              status === 'booking' ? 'badge badge-sm bg-gradient-warning' : (
+                status === 'posponed' ? 'badge badge-sm bg-gradient-secondary' : 'badge badge-sm bg-gradient-danger'
+              )
+            )
+          )}>{status}</span>
+      </td>
+      <td class="align-middle">
+        <Link to={'#'} class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="View customer">
+          View
+        </Link> &nbsp;
+        {/* <Link to={'#'} onClick={() => updateTransaction(data)} class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit customer">
+          Edit
+        </Link> */}
+        <button onClick={() => updateTransaction(data)} className='text-secondary font-weight-bold text-xs'>
+          Edit
         </button>
       </td>
     </tr>
