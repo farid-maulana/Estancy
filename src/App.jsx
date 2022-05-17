@@ -16,6 +16,9 @@ import EditProperty from './pages/admin/property/EditProperty';
 import Transactions from './pages/admin/transaction/Transactions';
 import CreateTransaction from './pages/admin/transaction/CreateTransaction';
 import EditTransaction from './pages/admin/transaction/EditTransactions'
+import Customers from './pages/admin/customer/Customers';
+import CreateCustomer from './pages/admin/customer/CreateCustomer';
+import EditCustomer from './pages/admin/customer/EditCustomer';
 
 
 function App() {
@@ -35,6 +38,9 @@ function App() {
         <Route path='/properties/detail' element={<PropertyDetail />} />
         <Route path='/properties/create' element={<CreateProperty />} />
         <Route path='/properties/edit' element={<EditProperty />} />
+        <Route path='/customers' element={<Customers />} />
+        <Route path='/customers/create' element={<CreateCustomer />} />
+        <Route path='/customers/edit' element={<EditCustomer />} />
         <Route path='/transactions' element={<Transactions />} />
         <Route path='/transactions/create' element={<CreateTransaction />} />
         <Route path='/transactions/edit' element={<EditTransaction />} />
