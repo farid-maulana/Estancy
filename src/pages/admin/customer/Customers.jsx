@@ -117,34 +117,6 @@ const Customers = () => {
                               />
                           })
                         } 
-                         {/* <CustomerTableRow
-                          name={'John Michael'}
-                          email={'john@gmail.com'}
-                          phone_number={'082584512245'}
-                          status={'booking'}
-                          deleteCustomer={deleteDataHandler}
-                          updateCustomer={updateDataHandler} />
-                        <CustomerTableRow
-                          name={'John Michael'}
-                          email={'john@gmail.com'}
-                          phone_number={'082584512245'}
-                          status={'active'}
-                          deleteCustomer={deleteDataHandler}
-                          updateCustomer={updateDataHandler} />
-                        <CustomerTableRow
-                          name={'John Michael'}
-                          email={'john@gmail.com'}
-                          phone_number={'082584512245'}
-                          status={'posponed'}
-                          deleteCustomer={deleteDataHandler}
-                          updateCustomer={updateDataHandler} />
-                        <CustomerTableRow
-                          name={'John Michael'}
-                          email={'john@gmail.com'}
-                          phone_number={'082584512245'}
-                          status={'check out'}
-                          deleteCustomer={deleteDataHandler}
-                          updateCustomer={updateDataHandler} /> */}
                       </tbody>
                     </table>
                   </div>

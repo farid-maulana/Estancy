@@ -42,10 +42,10 @@ const CustomerTableRow = ({ data, id, name, email, phone_number, date_of_birth, 
         <Link to={'#'} class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="View customer">
           View
         </Link> &nbsp;
-        <button onClick={() => updateCustomer(data)} className='text-secondary font-weight-bold text-xs'>
+        <button onClick={() => updateCustomer(data)} className='text-secondary font-weight-bold text-xs' style={{ border: 'none', background: 'transparent'}}>
           Edit
         </button>
-        <button onClick={() => deleteCustomer(id)} class="text-secondary font-weight-bold text-xs">
+        <button onClick={() => deleteCustomer(id)} className="text-secondary font-weight-bold text-xs" style={{ border: 'none', background: 'transparent'}}>
           Delete
         </button>
       </td>
