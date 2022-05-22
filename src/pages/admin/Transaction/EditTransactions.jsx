@@ -68,11 +68,6 @@ const EditTransaction = () => {
                     <InputFieldWithLabel type={'date'} nameId={'checkOut'} label={'Check Out'} value={transaction.checkOut} onChangeHandler={inputChangeHandler} />
                   </div>
                 </div>
-                <div className="row">
-                  <div className="col-md-6">
-                    <InputSelect nameId={'status'} label={'Status'} options={['BOOKING']} value={transaction.status} onChangeHandler={inputChangeHandler} />
-                  </div>
-                </div>
                 <div className="d-flex justify-content-end mb-3">
                   <Link to={'/transactions'} name="button" className="btn btn-light m-0">Cancel</Link>
                   <button type="submit" name="button" className="btn bg-gradient-primary m-0 ms-2" onClick={editDataHandler}>

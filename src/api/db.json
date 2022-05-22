@@ -128,51 +128,23 @@
   "transactions": [
     {
       "customerName": "Dafa Bintang Athaillah",
+      "status": "BOOKING",
       "customerPhoneNumber": "08115542001",
-      "propertyName": "Vila",
+      "propertyName": "Villa Cambridge",
       "propertyAddress": "Jln. Raya Batu Licin, Jl Pel Ferry, Gg Damai",
-      "checkIn": "2022-05-17",
+      "checkIn": "2022-05-20",
       "checkOut": "2022-05-31",
       "id": 1
     },
     {
-      "customerName": "Dafa Bintang Athaillah",
-      "customerPhoneNumber": "08115542001",
-      "propertyName": "Vila",
-      "propertyAddress": "Jln. Raya Batu Licin, Jl Pel Ferry, Gg Damai",
-      "checkIn": "2022-05-19",
-      "checkOut": "2022-05-30",
-      "id": 2
-    },
-    {
-      "customerName": "Dafa Bintang Athaillah ganteng",
-      "customerPhoneNumber": "08115542001",
-      "propertyName": "Vila ganteng",
-      "propertyAddress": "Jln. Raya Batu Licin, Jl Pel Ferry, Gg Damai",
+      "customerName": "Erda Andhika",
       "status": "BOOKING",
-      "checkIn": "2022-05-18",
-      "checkOut": "2022-05-30",
-      "id": 3
-    },
-    {
-      "customerName": "Dira",
-      "customerPhoneNumber": "087726551242",
-      "propertyName": "Vila Raja",
-      "propertyAddress": "Malang",
-      "checkIn": "2022-05-16",
+      "customerPhoneNumber": "0811665255",
+      "propertyName": "Vila Beton Baru",
+      "propertyAddress": "Malang Raya",
+      "checkIn": "2022-05-22",
       "checkOut": "2022-05-29",
-      "status": "BOOKING",
-      "id": 4
-    },
-    {
-      "customerName": "Dafa Bintang Athaillah",
-      "customerPhoneNumber": "08115542001",
-      "propertyName": "vila kunti",
-      "propertyAddress": "Jln. Raya Batu Licin, Jl Pel Ferry, Gg Damai",
-      "checkIn": "2022-05-26",
-      "checkOut": "2022-05-31",
-      "status": "BOOKING",
-      "id": 5
+      "id": 2
     }
   ]
 }

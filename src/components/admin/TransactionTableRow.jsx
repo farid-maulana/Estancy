@@ -43,8 +43,8 @@ const TransactionTableRow = ({ data, customerName, customerPhoneNumber, property
         {/* <Link to={'#'} onClick={() => updateTransaction(data)} class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit customer">
           Edit
         </Link> */}
-        <button onClick={() => updateTransaction(data)} className='text-secondary font-weight-bold text-xs'>
-          Edit
+        <button onClick={() => updateTransaction(data)} className="text-secondary font-weight-bold text-xs" style={{ border: 'none', background: 'transparent' }}>
+          <span className='hidden lg:inline'>Edit</span>
         </button>
       </td>
     </tr>

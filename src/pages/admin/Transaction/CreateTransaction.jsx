@@ -13,7 +13,8 @@ const navigate = useNavigate()
 
   const inputChangeHandler = (event) => {
     const { name, value } = event.target
-    setTransaction({ ...transaction, [name]: value})
+    const status = "BOOKING"
+    setTransaction({ ...transaction, [name]: value, status})
   }
 
   const createDataHandler = () => {
@@ -64,11 +65,6 @@ const navigate = useNavigate()
                   </div>
                   <div className="col-md-6">
                     <InputFieldWithLabel type={'date'} nameId={'checkOut'} label={'Check Out'} value={transaction.checkOut} onChangeHandler={inputChangeHandler} />
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col-md-6">
-                    <InputSelect nameId={'status'} label={'Status'} options={['BOOKING']} value={transaction.status} onChangeHandler={inputChangeHandler} />
                   </div>
                 </div>
                 <div className="d-flex justify-content-end mb-3">
