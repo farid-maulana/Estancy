@@ -24,7 +24,7 @@ const Navbar = () => {
                 </NavLink>
               </li>
               <li className="nav-item mx-4">
-                <NavLink to={'/properties'} className="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center text-dark" role="button">
+                <NavLink to={'/listed-properties'} className="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center text-dark" role="button">
                   Properties
                 </NavLink>
               </li>

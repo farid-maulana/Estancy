@@ -10,6 +10,7 @@ import ResetPassword from './pages/auth/ResetPassword';
 import ContactUs from './pages/client/ContactUs';
 import Dashboard from './pages/admin/Dashboard';
 import Properties from './pages/admin/property/Properties';
+import ListedProperties from './pages/client/Properties';
 import PropertyDetail from './pages/admin/property/PropertyDetail';
 import CreateProperty from './pages/admin/property/CreateProperty';
 import EditProperty from './pages/admin/property/EditProperty';
@@ -31,6 +32,7 @@ function App() {
         <Route path='/verification-code' element={<VerificationCode />}/>
         <Route path='/reset-password' element={<ResetPassword />}/>
         <Route path='/' element={<Home />}/>
+        <Route path='/listed-properties' element={<ListedProperties />}/>
         <Route path='/about-us' element={<AboutUs/>}/>
         <Route path='/contact-us' element={<ContactUs/>}/>
         <Route path='/dashboard' element={<Dashboard />} />
