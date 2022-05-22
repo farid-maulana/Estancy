@@ -1,22 +1,52 @@
-import { faClipboard, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCheck } from '@fortawesome/free-solid-svg-icons'
 import React from 'react'
+import { Link } from 'react-router-dom'
 
-const CustomerTableRow = ({ id, name, email, phone_number, deleteCustomer, updateCustomer, data }) => {
+const CustomerTableRow = ({ data, id, name, email, phone_number, date_of_birth, checkIn, status, deleteCustomer, updateCustomer }) => {
   return (
     <tr>
-      <td className="border-b border-slate-100 p-4 pl-8 text-slate-500">{name}</td>
-      <td className="border-b border-slate-100 p-4 text-slate-500">{email}</td>
-      <td className="border-b border-slate-100 p-4 pl-8 text-slate-500">{phone_number}</td>
-      <td className="border-b border-slate-100 p-4 text-slate-500 flex justify-around">
-        <a href="::javascript" className='text-secondary'>
-          <FontAwesomeIcon icon={faClipboard} /> <span className='hidden lg:inline'>Detail</span>
-        </a>
-        <button onClick={(updateDataHandler) => updateCustomer(data)} className='text-secondary'>
-          <FontAwesomeIcon icon={faEdit} /> <span className='hidden lg:inline'>Edit</span>
+      <td>
+        <div class="d-flex px-2 py-1">
+          <div>
+            <img src="https://demos.creative-tim.com/soft-ui-design-system-pro/assets/img/team-2.jpg" class="avatar avatar-sm me-3" alt="avatar" />
+          </div>
+          <div class="d-flex flex-column justify-content-center">
+            <h6 class="mb-0 text-xs">{name}</h6>
+            <p class="text-xs text-secondary mb-0">{email}</p>
+          </div>
+        </div>
+      </td>
+      <td>
+        <Link to={'#'} class="text-xs font-weight-bold mb-0" target={'_blank'}>{phone_number}</Link>
+      </td>
+      {/* <td>
+        <Link to={'#'} class="text-xs font-weight-bold mb-0" target={'_blank'}>{date_of_birth}</Link>
+      </td> */}
+      <td class="align-middle text-center">
+        <span class="text-secondary text-xs font-weight-bold">22 year</span>
+      </td>
+      <td class="align-middle text-center">
+        <span class="text-secondary text-xs font-weight-bold">{checkIn}</span>
+      </td>
+      <td class="align-middle text-center text-sm">
+        <span 
+          class={(
+            status === 'active' ? 'badge badge-sm bg-gradient-success' : (
+              status === 'booking' ? 'badge badge-sm bg-gradient-warning' : (
+                status === 'posponed' ? 'badge badge-sm bg-gradient-secondary' : 'badge badge-sm bg-gradient-danger'
+              )
+            )
+          )}>{status}</span>
+      </td>
+      <td class="align-middle">
+        <Link to={'#'} class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="View customer">
+          View
+        </Link> &nbsp;
+        <button onClick={() => updateCustomer(data)} className='text-secondary font-weight-bold text-xs'>
+          Edit
         </button>
-        <button onClick={(deleteDataHandler) => deleteCustomer(id)} className='text-secondary'>
-          <FontAwesomeIcon icon={faTrash} /> <span className='hidden lg:inline'>Delete</span>
+        <button onClick={() => deleteCustomer(id)} class="text-secondary font-weight-bold text-xs">
+          Delete
         </button>
       </td>
     </tr>

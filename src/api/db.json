@@ -108,21 +108,22 @@
   ],
   "customers": [
     {
-      "id": 1,
-      "name": "Nabila Senja",
+      "name": "Nabila Senja ",
       "email": "1941720134@student.polinema.ac.id",
-      "phone_number": "081334678756"
+      "phone_number": "087759342789",
+      "date_of_birth": "1999-05-17",
+      "checkIn": "2022-05-28",
+      "status": "posponed",
+      "id": 1
     },
     {
-      "newCustomer": {
-        "name": "",
-        "email": "",
-        "phone_number": ""
-      },
-      "name": "Farid Maulana",
-      "email": "farid@mail.com",
-      "phone_number": "08923647232",
-      "id": 3
+      "name": "Dafa Bintang",
+      "email": "dafabintang@gmail.com",
+      "date_of_birth": "1998-02-17",
+      "phone_number": "088872184324",
+      "checkIn": "2022-05-19",
+      "status": "booking",
+      "id": 2
     }
   ],
   "transactions": [

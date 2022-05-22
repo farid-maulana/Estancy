@@ -1,9 +1,9 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCreditCard, faHandshakeAngle, faHome, faPlus, faUsers } from '@fortawesome/free-solid-svg-icons'
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Navbar from '../../../components/admin/Navbar'
 import CustomerTableRow from '../../../components/admin/CustomerTableRow'
+import Sidebar from '../../../components/admin/Sidebar'
+import Footer from '../../../components/admin/Footer'
 
 
 const Customers = () => {
@@ -19,7 +19,7 @@ const Customers = () => {
 
   const updateDataHandler = (data) => {
     setCustomer(data)
-    navigate('/edit-customer', {state: data})
+    navigate('/customers/edit', { state: data })
   }
 
   const deleteDataHandler = (id) => {
@@ -35,89 +35,127 @@ const Customers = () => {
 
 
   return (
-    <div className='container-xl flex bg-[#f8f8f8] overflow-hidden min-h-screen'>
-      {/* Navbar Section */}
-      <Navbar />
-      {/* End Navbar Section */}
-
-      <div className='min-h-screen w-full flex flex-row'>
-        {/* Sidebar Section */}
-        <aside className='z-10 mt-16 w-72 bg-white border-t shadow-md hidden lg:block'>
-          <ul className='mt-6 ml-3 list-none mb-16'>
-            <li className=' w-full py-3 px-3 rounded-tl-lg rounded-bl-lg hover:bg-slate-50 mb-4'>
-              <Link to={'/listed-properties'}>
-                <FontAwesomeIcon icon={faHome} />
-                <span className='ml-2 font-medium text-sm'>Properties</span>
-              </Link>
-            </li>
-            <li className='bg-slate-50 w-full py-3 px-3 rounded-tl-lg rounded-bl-lg text-primary mb-3'>
-              <Link to={'/listed-customers'}>
-                <FontAwesomeIcon icon={faUsers} />
-                <span className='ml-2 font-medium text-sm'>Customers</span>
-              </Link>
-            </li>
-            <li className='w-full py-3 px-3 rounded-tl-lg rounded-bl-lg text-slate-600 mb-3 hover:bg-slate-50'>
-              <a href="::javascript">
-                <FontAwesomeIcon icon={faHandshakeAngle} />
-                <span className='ml-2 font-medium text-sm'>Negotiations</span>
-              </a>
-            </li>
-            <li className='w-full py-3 px-3 rounded-tl-lg rounded-bl-lg text-slate-600 mb-3 hover:bg-slate-50'>
-              <Link to={'/listed-transactions'}>
-                <FontAwesomeIcon icon={faCreditCard} />
-                <span className='ml-2 font-medium text-sm'>Transactions</span>
-              </Link>
-            </li>
-          </ul>
-        </aside>
-        {/* End Sidebar Section */}
-
-        {/* Content Section */}
-        <section className='mt-16 mb-16 w-full'>
-          <div className='p-6'>
-            <h1 className='font-medium text-xl mb-4'>Listed Customer</h1>
-            <Link to={'/create-customer'}>
-              <button className='rounded-lg shadow-md bg-gradient-to-r from-primary to-[#846BE4] text-white text-xs font-medium tracking-wide capitalize py-2.5 px-5 mb-6 items-end hover:shadow-lg hover:scale-101 active:opacity-90 transition'>
-                <FontAwesomeIcon icon={faPlus} /> Add Customer
-              </button>
-            </Link>
-            <div className="not-prose relative bg-white rounded-xl overflow-hidden">
-              <div className="relative rounded-xl overflow-auto">
-                <div className="shadow-sm overflow-hidden my-6">
-                  <table className="border-collapse table-fixed w-full text-sm">
-                    <thead>
-                      <tr>
-                        <th className="border-b font-medium p-4 pl-8 pt-0 pb-3 text-slate-400 text-left">Name</th>
-                        <th className="border-b font-medium p-4 pt-0 pb-3 text-slate-400 text-left">Email</th>
-                        <th className="border-b font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 text-left">Phone Number</th>
-                        <th className="border-b font-medium p-4 pt-0 pb-3 text-slate-400 text-left">Action</th>
-                      </tr>
-                    </thead>
-                    <tbody className="bg-white">
-                      {
-                        customers && customers.map((customer, index) => {
-                          return <CustomerTableRow
-                            data={customer}
-                            key={index}
-                            id={customer.id}
-                            name={customer.name}
-                            email={customer.email}
-                            phone_number={customer.phone_number}
-                            deleteCustomer={deleteDataHandler}
-                            updateCustomer={updateDataHandler} />
-                        })
-                      }
-                    </tbody>
-                  </table>
+    <>
+      <Sidebar />
+      <main className="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+        <Navbar activePage={'Customers'} />
+        <div className="container-fluid py-4">
+          <div className="row">
+            <div className="col-12">
+              <div className="card mb-4">
+                <div className="card-header pb-0">
+                  <div className="d-lg-flex">
+                    <div>
+                      <h5 className="mb-0">All Customers</h5>
+                      <p className="text-sm mb-0">
+                        You have {Object.keys(customers).length} customers!
+                      </p>
+                    </div>
+                    <div className="ms-auto my-auto mt-lg-0 mt-4">
+                      <Link to={'/customers/create'} className="btn btn-icon btn-dark me-2">
+                        <i className="fa fa-plus"></i>
+                        <span className="btn-inner--text"> &nbsp; Add customer</span>
+                      </Link>
+                      <button type="button" className="btn btn-outline-dark me-2" data-bs-toggle="modal" data-bs-target="#import">
+                        Import
+                      </button>
+                      <div className="modal fade" id="import" tabIndex="-1" aria-hidden="true">
+                        <div className="modal-dialog mt-lg-10">
+                          <div className="modal-content">
+                            <div className="modal-header">
+                              <h5 className="modal-title" id="ModalLabel">Import CSV</h5>
+                              <i className="fas fa-upload ms-3"></i>
+                              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div className="modal-body">
+                              <p>You can browse your computer for a file.</p>
+                              <input type="text" placeholder="Browse file..." className="form-control mb-3" />
+                              <div className="form-check">
+                                <input className="form-check-input" type="checkbox" value="" id="importCheck" checked="" />
+                                <label className="custom-control-label" htmlFor="importCheck">I accept the terms and conditions</label>
+                              </div>
+                            </div>
+                            <div className="modal-footer">
+                              <button type="button" className="btn bg-gradient-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+                              <button type="button" className="btn bg-gradient-primary btn-sm">Upload</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <button className="btn btn-outline-dark export mt-sm-0 mt-1" data-type="csv" type="button" name="button">Export</button>
+                    </div>
+                  </div>
                 </div>
-                <p className='text-xs text-slate-400 mb-6 ml-4'>Showing {Object.keys(customers).length} results</p>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table align-items-center mb-0">
+                      <thead>
+                        <tr>
+                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Customer</th>
+                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Phone Number</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Age</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Check In</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
+                          <th class="text-secondary opacity-7"></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {
+                          customers && customers.map((customer, index) => {
+                            return <CustomerTableRow
+                              data={customer}
+                              key={index}
+                              id={customer.id}
+                              name={customer.name}
+                              email={customer.email}
+                              phone_number={customer.phone_number}
+                              date_of_birth={customer.date_of_birth}
+                              checkIn={customer.checkIn}
+                              status={customer.status}
+                              updateCustomer={updateDataHandler}
+                              deleteCustomer={deleteDataHandler}
+                              />
+                          })
+                        } 
+                         {/* <CustomerTableRow
+                          name={'John Michael'}
+                          email={'john@gmail.com'}
+                          phone_number={'082584512245'}
+                          status={'booking'}
+                          deleteCustomer={deleteDataHandler}
+                          updateCustomer={updateDataHandler} />
+                        <CustomerTableRow
+                          name={'John Michael'}
+                          email={'john@gmail.com'}
+                          phone_number={'082584512245'}
+                          status={'active'}
+                          deleteCustomer={deleteDataHandler}
+                          updateCustomer={updateDataHandler} />
+                        <CustomerTableRow
+                          name={'John Michael'}
+                          email={'john@gmail.com'}
+                          phone_number={'082584512245'}
+                          status={'posponed'}
+                          deleteCustomer={deleteDataHandler}
+                          updateCustomer={updateDataHandler} />
+                        <CustomerTableRow
+                          name={'John Michael'}
+                          email={'john@gmail.com'}
+                          phone_number={'082584512245'}
+                          status={'check out'}
+                          deleteCustomer={deleteDataHandler}
+                          updateCustomer={updateDataHandler} /> */}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </section>
-        {/* End Content Section */}
-      </div>
-    </div>
+          <Footer />
+        </div>
+      </main>
+    </>
   )
 }
 
