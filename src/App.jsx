@@ -20,6 +20,7 @@ import EditTransaction from './pages/admin/transaction/EditTransactions'
 import Customers from './pages/admin/customer/Customers';
 import CreateCustomer from './pages/admin/customer/CreateCustomer';
 import EditCustomer from './pages/admin/customer/EditCustomer';
+import Negotiation from './pages/admin/negoitation/Negoitation';
 
 
 function App() {
@@ -43,6 +44,7 @@ function App() {
         <Route path='/customers' element={<Customers />} />
         <Route path='/customers/create' element={<CreateCustomer />} />
         <Route path='/customers/edit' element={<EditCustomer />} />
+        <Route path='/negotiations' element={<Negotiation/>}/>
         <Route path='/transactions' element={<Transactions />} />
         <Route path='/transactions/create' element={<CreateTransaction />} />
         <Route path='/transactions/edit' element={<EditTransaction />} />
