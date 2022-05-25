@@ -4,22 +4,27 @@ import Navbar from '../../../components/admin/Navbar'
 import Sidebar from '../../../components/admin/Sidebar'
 import Footer from '../../../components/admin/Footer'
 import CardProperty from '../../../components/admin/CardProperty'
+import { collection, onSnapshot, orderBy, query } from 'firebase/firestore'
+import { db } from '../../../firebase/config'
 
 
 const Properties = () => {
-  const apiURL = "http://localhost:3001/properties/"
   const navigate = useNavigate()
   const [properties, setProperties] = useState(false)
 
   const getAllDataHandler = () => {
-    fetch(apiURL)
-      .then(response => response.json())
-      .then(property => setProperties(property))
+    const q = query(collection(db, 'properties'), orderBy('created', 'desc'))
+    onSnapshot(q, (querySnapshot) => {
+      setProperties(querySnapshot.docs.map(doc => ({
+        id: doc.id,
+        data: doc.data()
+      })))
+    })
   }
 
   const detailDataHandler = (data) => {
     setProperties(data)
-    navigate('/properties/detail', {state: data})
+    navigate('/properties/detail', { state: data })
   }
 
   useEffect(() => {
@@ -66,14 +71,14 @@ const Properties = () => {
                   <div className="row">
                     {
                       properties && properties.map((property, index) => {
-                        return <CardProperty 
+                        return <CardProperty
                           data={property}
                           key={index}
-                          id={property.id}
-                          photo={property.photo} 
-                          status={property.status} 
-                          name={property.name} 
-                          address={property.location}
+                          id={property.data.id}
+                          photo={property.data.photo}
+                          status={property.data.status}
+                          name={property.data.name}
+                          address={property.data.location}
                           detailProperty={detailDataHandler} />
                       })
                     }

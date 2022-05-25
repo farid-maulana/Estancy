@@ -5,6 +5,8 @@ import Sidebar from '../../../components/admin/Sidebar'
 import InputFieldWithLabel from '../../../components/auth/InputFieldWithLabel'
 import Footer from '../../../components/admin/Footer'
 import InputSelect from '../../../components/form/InputSelect'
+import { addDoc, collection, Timestamp } from 'firebase/firestore'
+import { db } from '../../../firebase/config'
 
 const CreateProperty = () => {
   const apiURL = "http://localhost:3001/properties/"
@@ -17,18 +19,36 @@ const CreateProperty = () => {
     setProperty({ ...property, [name]: value, status })
   }
 
-  const createDataHandler = () => {
-    fetch(apiURL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(property),
-    })
-      .then(response => response.json())
-      .then(() => {
+  const createDataHandler = async (e) => {
+    e.preventDefault()
+    try {
+      await addDoc(collection(db, 'properties'), {
+        name: property.name,
+        location: property.location,
+        description: property.description,
+        price: property.price,
+        bedroom: property.bedroom,
+        bathroom: property.bathroom,
+        building_area: property.building_area,
+        private_pool: property.private_pool,
+        living_room: property.living_room,
+        kitchen: property.kitchen,
+        smoking_area: property.smoking_area,
+        parking_area: property.parking_area,
+        wifi: property.wifi,
+        television: property.television,
+        shower: property.shower,
+        pet: property.pet,
+        photo: property.photo,
+        status: 'available',
+        created:Timestamp.now(),
+        updated:Timestamp.now(),
+      }).then(() => {
         navigate('/properties')
       })
+    } catch (err) {
+      alert(err)
+    }
   }
 
   return (
