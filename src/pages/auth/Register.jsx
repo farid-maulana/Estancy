@@ -1,9 +1,32 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import InputFieldWithLabel from '../../components/auth/InputFieldWithLabel'
-import IconButton from '../../components/auth/IconButton'
+import AlternativeAuth from '../../components/auth/AlternativeAuth'
+import { createUserWithEmailAndPassword, getAuth, updateProfile } from 'firebase/auth'
 
 const Register = () => {
+  const auth = getAuth()
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [name, setName] = useState('')
+  const navigate = useNavigate()
+
+  const handleForm = (e) => {
+    e.preventDefault()
+    createUserWithEmailAndPassword(auth, email, password).then((result) => {
+      const user = auth.currentUser
+      updateProfile(user, {
+        displayName: name,
+        photoURL: 'https://www.jobstreet.co.id/en/cms/employer/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png'
+      })
+      navigate('/')
+      console.log(user)
+    }).catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+    });
+  }
+
   return (
     <section>
       <img src="/img/shapes/pattern-lines-primary.svg" alt="pattern-lines" className="position-absolute opacity-1 start-0" style={{ width: '100%', height: '100vh', objectFit: 'cover' }} />
@@ -20,15 +43,15 @@ const Register = () => {
                   <form>
                     <div className='row'>
                       <div className='col-lg-6 col-md-6 col-sm-12'>
-                        <InputFieldWithLabel type={'text'} nameId={'name'} label={'Full Name'} />
+                        <InputFieldWithLabel type={'text'} nameId={'name'} label={'Full Name'} onChangeHandler={(e) => setName(e.target.value)} />
                       </div>
                       <div className='col-lg-6 col-md-6 col-sm-12'>
-                        <InputFieldWithLabel type={'email'} nameId={'email'} label={'Email'} />
+                        <InputFieldWithLabel type={'email'} nameId={'email'} label={'Email'} onChangeHandler={(e) => setEmail(e.target.value)} />
                       </div>
                     </div>
                     <div className='row'>
                       <div className='col-lg-6 col-md-6 col-sm-12'>
-                        <InputFieldWithLabel type={'password'} nameId={'password'} label={'Password'} />
+                        <InputFieldWithLabel type={'password'} nameId={'password'} label={'Password'} onChangeHandler={(e) => setPassword(e.target.value)} />
                       </div>
                       <div className='col-lg-6 col-md-6 col-sm-12'>
                         <InputFieldWithLabel type={'password'} nameId={'password_confirmation'} label={'Confirm Password'} />
@@ -41,22 +64,11 @@ const Register = () => {
                       </label>
                     </div>
                     <div className="text-center">
-                      <button type="button" className="btn bg-gradient-primary w-100 mt-4 mb-0">Sign up</button>
+                      <button type="button" onClick={handleForm} className="btn bg-gradient-primary w-100 mt-4 mb-0">Sign up</button>
                     </div>
                   </form>
                 </div>
-                <div className="row px-xl-5 px-sm-4 px-3 mb-4 mt-3">
-                  <div className="mb-3 position-relative text-center">
-                    <p className="text-sm font-weight-bold text-secondary text-border d-inline z-index-2 bg-white px-3">
-                      or sign up with
-                    </p>
-                  </div>
-                  <div className="d-flex justify-content-center">
-                    <IconButton href={'#'} path={'img/icons/google.png'} alt={'Google'} />
-                    <IconButton href={'#'} path={'img/icons/apple.png'} alt={'Apple ID'} />
-                    <IconButton href={'#'} path={'img/icons/facebook.png'} alt={'Facebook'} />
-                  </div>
-                </div>
+                <AlternativeAuth />
                 <div className="card-footer text-center pt-0 px-sm-4 px-1">
                   <p className="mb-4 text-sm mx-auto">
                     Already have an account?

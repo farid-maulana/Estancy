@@ -1,7 +1,18 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { getAuth, signOut } from 'firebase/auth'
 
 const Navbar = ({ activePage }) => {
+  const auth = getAuth()
+  const user = auth.currentUser
+  const navigate = useNavigate()
+
+  const logOut = () => {
+    signOut(auth).then(() => {
+      navigate('/')
+    })
+  }
+
   return (
     <nav className="navbar navbar-main navbar-expand-lg position-sticky mt-4 top-1 px-0 mx-4 shadow-none border-radius-xl z-index-sticky" id="navbarBlur" data-scroll="true">
       <div className="container-fluid py-1 px-3">
@@ -45,11 +56,36 @@ const Navbar = ({ activePage }) => {
             </div>
           </div>
           <ul className="navbar-nav justify-content-end">
-            <li className="nav-item d-flex align-items-center">
-              <Link to={'/login'} className="nav-link text-body font-weight-bold px-0" target="_blank">
-                <i className="fa fa-user me-sm-1"></i>
-                <span className="d-sm-inline d-none">Sign In</span>
+            <li className="nav-item dropdown d-flex align-items-center">
+              <Link to={'#'} className="nav-link text-body font-weight-bold px-0" id="dropdownUserButton" data-bs-toggle="dropdown" aria-expanded="false">
+                {/* <i className="fa fa-user me-sm-1"></i>
+                <span className="d-sm-inline d-none">{user.displayName}</span> */}
+                <img alt="Profile" class="avatar avatar-sm rounded-circle" src={user.photoURL}></img>
               </Link>
+              <ul className="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n4" aria-labelledby="dropdownUserButton">
+                <li className="mb-2">
+                  <Link to={'#'} className="dropdown-item border-radius-md">
+                    <div className="d-flex py-1">
+                      <div className="d-flex flex-column justify-content-center">
+                        <h6 className="text-sm font-weight-normal mb-1">
+                          My Profile
+                        </h6>
+                      </div>
+                    </div>
+                  </Link>
+                </li>
+                <li className="mb-2">
+                  <Link to={'#'} onClick={logOut} className="dropdown-item border-radius-md">
+                    <div className="d-flex py-1">
+                      <div className="d-flex flex-column justify-content-center">
+                        <h6 className="text-sm font-weight-normal mb-1">
+                          Sign Out
+                        </h6>
+                      </div>
+                    </div>
+                  </Link>
+                </li>
+              </ul>
             </li>
             <li className="nav-item d-xl-none ps-3 d-flex align-items-center">
               <Link to={'#'} className="nav-link text-body p-0" id="iconNavbarSidenav">

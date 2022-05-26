@@ -1,14 +1,14 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 
 const Sidebar = () => {
   return (
     <aside className="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 " id="sidenav-main">
       <div className="sidenav-header">
         <i className="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-        <a className="navbar-brand m-0" href=" https://demos.creative-tim.com/soft-ui-dashboard-pro/pages/dashboards/default.html " target="_blank">
+        <Link to={'/'} className="navbar-brand m-0">
           <img src="/img/logo.png" className='mx-auto ps-4' alt="main_logo" style={{ maxHeight: '4rem' }}/>
-        </a>
+        </Link>
       </div>
       <hr className="horizontal dark mt-2" />
       <div className="collapse navbar-collapse w-auto h-auto h-100 pb-5" id="sidenav-collapse-main">

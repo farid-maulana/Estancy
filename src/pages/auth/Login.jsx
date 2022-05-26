@@ -1,9 +1,26 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import InputField from '../../components/auth/InputField'
-import IconButton from '../../components/auth/IconButton'
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
+import AlternativeAuth from '../../components/auth/AlternativeAuth'
 
 const Login = () => {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const navigate = useNavigate()
+  const auth = getAuth()
+
+  const handleForm = (e) => {
+    e.preventDefault()
+    signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
+      const user = userCredential.user
+      navigate('/')
+    }).catch((error) => {
+      const errorCode = error.code
+      const errorMessage = error.message
+    })
+  }
+
   return (
     <section>
       <img src="/img/shapes/pattern-lines-primary.svg" alt="pattern-lines" className="position-absolute opacity-1 start-0" style={{ width: '100%', height: '100vh', objectFit: 'cover' }} />
@@ -18,8 +35,8 @@ const Login = () => {
                 </div>
                 <div className="card-body">
                   <form>
-                    <InputField type={'email'} nameId={'email '} placeholder={'Email'} />
-                    <InputField type={'password'} nameId={'password'} placeholder={'Password'} />
+                    <InputField type={'email'} nameId={'email '} placeholder={'Email'} onChangeHandler={(e) => setEmail(e.target.value)} />
+                    <InputField type={'password'} nameId={'password'} placeholder={'Password'} onChangeHandler={(e) => setPassword(e.target.value)} />
                     <div className='d-flex justify-content-between'>
                       <div className="form-check form-switch">
                         <input className="form-check-input" type="checkbox" id="rememberMe" />
@@ -29,23 +46,12 @@ const Login = () => {
                     </div>
                     <div className="text-center">
                       <Link to={'/dashboard'}>
-                        <button type="button" className="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0">Sign in</button>
+                        <button type="button" onClick={handleForm} className="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0">Sign in</button>
                       </Link>
                     </div>
                   </form>
                 </div>
-                <div className="row px-xl-5 px-sm-4 px-3 mb-4">
-                  <div className="mb-3 position-relative text-center">
-                    <p className="text-sm font-weight-bold text-secondary text-border d-inline z-index-2 bg-white px-3">
-                      or sign in with
-                    </p>
-                  </div>
-                  <div className="d-flex justify-content-center">
-                    <IconButton href={'#'} path={'img/icons/google.png'} alt={'Google'} />
-                    <IconButton href={'#'} path={'img/icons/apple.png'} alt={'Apple ID'} />
-                    <IconButton href={'#'} path={'img/icons/facebook.png'} alt={'Facebook'} />
-                  </div>
-                </div>
+                <AlternativeAuth />
                 <div className="card-footer text-center pt-0 px-lg-2 px-1">
                   <p className="mb-4 text-sm mx-auto">
                     Don't have an account?
