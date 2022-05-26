@@ -4,7 +4,8 @@ import Navbar from '../../../components/admin/Navbar'
 import Sidebar from '../../../components/admin/Sidebar'
 import InputFieldWithLabel from '../../../components/auth/InputFieldWithLabel'
 import Footer from '../../../components/admin/Footer'
-import InputSelect from '../../../components/form/InputSelect'
+import { addDoc, collection, Timestamp } from 'firebase/firestore'
+import { db } from '../../../firebase/config'
 
 const CreateTransaction = () => {
 const apiURL = "http://localhost:3001/transactions/"
@@ -17,18 +18,38 @@ const navigate = useNavigate()
     setTransaction({ ...transaction, [name]: value, status})
   }
 
-  const createDataHandler = () => {
-    fetch(apiURL, {
-      method: 'POST', // or 'PUT'
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(transaction),
-    })
-    .then(response => response.json())
-    .then(() => {
-      navigate('/transactions')
-    })
+  // const createDataHandler = () => {
+  //   fetch(apiURL, {
+  //     method: 'POST', // or 'PUT'
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify(transaction),
+  //   })
+  //   .then(response => response.json())
+  //   .then(() => {
+  //     navigate('/transactions')
+  //   })
+  // }
+  const createDataHandler = async (e) => {
+    e.preventDefault()
+    try {
+      await addDoc(collection(db, 'transactions'), {
+        customerName: transaction.customerName,
+        customerPhoneNumber: transaction.customerPhoneNumber,
+        propertyName: transaction.propertyName,
+        propertyAddress: transaction.propertyAddress,
+        checkIn: transaction.checkIn,
+        checkOut: transaction.checkOut,
+        status: 'BOOKING',
+        created:Timestamp.now(),
+        updated:Timestamp.now(),
+      }).then(() => {
+        navigate('/transactions')
+      })
+    } catch (err) {
+      alert(err)
+    }
   }
   
   return (

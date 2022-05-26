@@ -4,32 +4,37 @@ import Navbar from '../../../components/admin/Navbar'
 import Sidebar from '../../../components/admin/Sidebar'
 import InputFieldWithLabel from '../../../components/auth/InputFieldWithLabel'
 import Footer from '../../../components/admin/Footer'
-import InputSelect from '../../../components/form/InputSelect'
+import { doc, Timestamp, updateDoc } from 'firebase/firestore'
+import { db } from '../../../firebase/config'
 
 const EditTransaction = () => {
-  const apiURL = "http://localhost:3001/transactions/"
   const { state } = useLocation()
   const navigate = useNavigate()
 
-  const [transaction, setTransaction] = useState(state)
-  const inputChangeHandler = (event) => {
-    const { name, value } = event.target
-    setTransaction({ ...transaction, [name]: value })
-    console.log(transaction)
-  }
+  const [customerName, setCustomerName] = useState(state.data.customerName)
+  const [customerPhoneNumber, setCustomerPhoneNumber] = useState(state.data.customerPhoneNumber)
+  const [propertyName, setPropertyName] = useState(state.data.propertyName)
+  const [propertyAddress, setPropertyAddress] = useState(state.data.propertyAddress)
+  const [checkIn, setCheckIn] = useState(state.data.checkIn)
+  const [checkOut, setCheckOut] = useState(state.data.checkOut)
 
-  const editDataHandler = () => {
-    fetch(apiURL + transaction.id, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(transaction),
-    })
-      .then(response => response.json())
-      .then(() => {
-        navigate('/transactions')
-      })
+  const editDataHandler = async (e) => {
+    e.preventDefault()
+    const transactionDocRef = doc(db, 'transactions', state.id)
+    try {
+      await updateDoc(transactionDocRef, {
+        customerName: customerName,
+        customerPhoneNumber: customerPhoneNumber,
+        propertyName: propertyName,
+        propertyAddress: propertyAddress,
+        checkIn: checkIn,
+        checkOut: checkOut,
+        status: 'available',
+        updated: Timestamp.now()
+      }).then(() => navigate('/transactions'))
+    } catch (err) {
+      alert(err)
+    }
   }
   
   return (
@@ -46,26 +51,26 @@ const EditTransaction = () => {
                 <hr className="horizontal dark my-3" />
                 <div className="row">
                   <div className="col-md-6">
-                    <InputFieldWithLabel type={'text'} nameId={'customerName'} label={'Customer Name'} value={transaction.customerName} onChangeHandler={inputChangeHandler} />
+                    <InputFieldWithLabel type={'text'} nameId={'customerName'} label={'Customer Name'} value={customerName} onChangeHandler={(e) => setCustomerName(e.target.value)} />
                   </div>
                   <div className="col-md-6">
-                    <InputFieldWithLabel type={'text'} nameId={'customerPhoneNumber'} label={'Customer Phone Number'} value={transaction.customerPhoneNumber} onChangeHandler={inputChangeHandler} />
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col-md-6">
-                    <InputFieldWithLabel type={'text'} nameId={'propertyName'} label={'Property Name'} value={transaction.propertyName} onChangeHandler={inputChangeHandler} />
-                  </div>
-                  <div className="col-md-6">
-                    <InputFieldWithLabel type={'text'} nameId={'propertyAddress'} label={'Property Address'} value={transaction.propertyAddress} onChangeHandler={inputChangeHandler} />
+                    <InputFieldWithLabel type={'text'} nameId={'customerPhoneNumber'} label={'Customer Phone Number'} value={customerPhoneNumber} onChangeHandler={(e) => setCustomerPhoneNumber(e.target.value)}/>
                   </div>
                 </div>
                 <div className="row">
                   <div className="col-md-6">
-                    <InputFieldWithLabel type={'date'} nameId={'checkIn'} label={'Check In'} value={transaction.checkIn} onChangeHandler={inputChangeHandler} />
+                    <InputFieldWithLabel type={'text'} nameId={'propertyName'} label={'Property Name'} value={propertyName} onChangeHandler={(e) => setPropertyName(e.target.value)} />
                   </div>
                   <div className="col-md-6">
-                    <InputFieldWithLabel type={'date'} nameId={'checkOut'} label={'Check Out'} value={transaction.checkOut} onChangeHandler={inputChangeHandler} />
+                    <InputFieldWithLabel type={'text'} nameId={'propertyAddress'} label={'Property Address'} value={propertyAddress} onChangeHandler={(e) => setPropertyAddress(e.target.value)} />
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-md-6">
+                    <InputFieldWithLabel type={'date'} nameId={'checkIn'} label={'Check In'} value={checkIn} onChangeHandler={(e) => setCheckIn(e.target.value)} />
+                  </div>
+                  <div className="col-md-6">
+                    <InputFieldWithLabel type={'date'} nameId={'checkOut'} label={'Check Out'} value={checkOut} onChangeHandler={(e) => setCheckOut(e.target.value)} />
                   </div>
                 </div>
                 <div className="d-flex justify-content-end mb-3">

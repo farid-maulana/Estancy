@@ -4,16 +4,21 @@ import Footer from '../../../components/admin/Footer'
 import Navbar from '../../../components/admin/Navbar'
 import Sidebar from '../../../components/admin/Sidebar'
 import TransactionTableRow from '../../../components/admin/TransactionTableRow'
+import { collection, onSnapshot, orderBy, query } from 'firebase/firestore'
+import { db } from '../../../firebase/config'
 
 const Transactions = () => {
-  const apiURL = "http://localhost:3001/transactions/"
   const navigate = useNavigate()
   const [transactions, setTransactions] = useState(false)
 
   const getAllDataHandler = () => {
-    fetch(apiURL)
-      .then(response => response.json())
-      .then(transaction => setTransactions(transaction))
+    const q = query(collection(db, 'transactions'), orderBy('created', 'desc'))
+    onSnapshot(q, (querySnapshot) => {
+      setTransactions(querySnapshot.docs.map(doc => ({
+        id: doc.id,
+        data: doc.data()
+      })))
+    })
   }
 
   const updateDataHandler = (data) => {
@@ -95,14 +100,14 @@ const Transactions = () => {
                             return <TransactionTableRow 
                               data={transaction}
                               key={index}
-                              customerName={transaction.customerName}
-                              customerPhoneNumber={transaction.customerPhoneNumber}
-                              transactionId={transaction.transactionId}
-                              propertyName={transaction.propertyName}
-                              propertyAddress={transaction.propertyAddress}
-                              checkIn={transaction.checkIn}
-                              checkOut={transaction.checkOut}
-                              status={transaction.status}
+                              customerName={transaction.data.customerName}
+                              customerPhoneNumber={transaction.data.customerPhoneNumber}
+                              transactionId={transaction.data.transactionId}
+                              propertyName={transaction.data.propertyName}
+                              propertyAddress={transaction.data.propertyAddress}
+                              checkIn={transaction.data.checkIn}
+                              checkOut={transaction.data.checkOut}
+                              status={transaction.data.status}
                               updateTransaction={updateDataHandler}
 
                             />
