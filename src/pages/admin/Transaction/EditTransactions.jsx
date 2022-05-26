@@ -29,7 +29,7 @@ const EditTransaction = () => {
         propertyAddress: propertyAddress,
         checkIn: checkIn,
         checkOut: checkOut,
-        status: 'available',
+        status: 'BOOKING',
         updated: Timestamp.now()
       }).then(() => navigate('/transactions'))
     } catch (err) {
