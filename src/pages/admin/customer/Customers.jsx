@@ -4,29 +4,44 @@ import Navbar from '../../../components/admin/Navbar'
 import CustomerTableRow from '../../../components/admin/CustomerTableRow'
 import Sidebar from '../../../components/admin/Sidebar'
 import Footer from '../../../components/admin/Footer'
+import { collection, onSnapshot, orderBy, query } from 'firebase/firestore'
+import { db } from '../../../firebase/config'
+import { doc, updateDoc, deleteDoc} from "firebase/firestore";
 
 
 const Customers = () => {
-  const apiURL = "http://localhost:3001/customers/"
   const navigate = useNavigate()
-  const [customers, setCustomer] = useState(false)
+  const [customers, setCustomers] = useState(false)
 
   const getAllDataHandler = () => {
-    fetch(apiURL)
-      .then(response => response.json())
-      .then(customer => setCustomer(customer))
+    const q = query(collection(db, 'customers'), orderBy('created', 'desc'))
+    onSnapshot(q, (querySnapshot) => {
+      setCustomers(querySnapshot.docs.map(doc => ({
+        id: doc.id,
+        data: doc.data()
+      })))
+    })
   }
 
   const updateDataHandler = (data) => {
-    setCustomer(data)
+    setCustomers(data)
     navigate('/customers/edit', { state: data })
   }
 
-  const deleteDataHandler = (id) => {
-    fetch(apiURL + id, { method: 'DELETE' })
-      .then(() => {
-        getAllDataHandler()
-      })
+  // const deleteDataHandler = (id) => {
+  //   fetch(apiURL + id, { method: 'DELETE' })
+  //     .then(() => {
+  //       getAllDataHandler()
+  //     })
+  // }
+
+  const deleteDataHandler = async (id) => {
+    const customerDocRef = doc(db, 'customers', id)
+    try{
+      await deleteDoc(customerDocRef)
+    } catch (err) {
+      alert(err)
+    }
   }
 
   useEffect(() => {
@@ -105,13 +120,13 @@ const Customers = () => {
                             return <CustomerTableRow
                               data={customer}
                               key={index}
-                              id={customer.id}
-                              name={customer.name}
-                              email={customer.email}
-                              phone_number={customer.phone_number}
-                              date_of_birth={customer.date_of_birth}
-                              checkIn={customer.checkIn}
-                              status={customer.status}
+                              id={customer.data.id}
+                              name={customer.data.name}
+                              email={customer.data.email}
+                              phone_number={customer.data.phone_number}
+                              date_of_birth={customer.data.date_of_birth}
+                              checkIn={customer.data.checkIn}
+                              status={customer.data.status}
                               updateCustomer={updateDataHandler}
                               deleteCustomer={deleteDataHandler}
                               />
