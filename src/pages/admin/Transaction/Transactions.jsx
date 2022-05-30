@@ -5,6 +5,7 @@ import Navbar from '../../../components/admin/Navbar'
 import Sidebar from '../../../components/admin/Sidebar'
 import TransactionTableRow from '../../../components/admin/TransactionTableRow'
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore'
+import { deleteDoc, doc } from 'firebase/firestore'
 import { db } from '../../../firebase/config'
 
 const Transactions = () => {
@@ -24,6 +25,15 @@ const Transactions = () => {
   const updateDataHandler = (data) => {
     setTransactions(data)
     navigate('/transactions/edit', { state: data })
+  }
+
+  const deleteDataHandler = async (data) => {
+    const transactionDocRef = doc(db, 'transactions', data)
+    try {
+      await deleteDoc(transactionDocRef).then(() => navigate('/transactions'))
+    } catch (err) {
+      alert(err)
+    }
   }
 
   useEffect(() => {
@@ -109,7 +119,7 @@ const Transactions = () => {
                               checkOut={transaction.data.checkOut}
                               status={transaction.data.status}
                               updateTransaction={updateDataHandler}
-
+                              deleteTransaction={deleteDataHandler}
                             />
                         })
                         

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const TransactionTableRow = ({ data, customerName, customerPhoneNumber, propertyName, propertyAddress, checkIn, checkOut, status, updateTransaction }) => {
+const TransactionTableRow = ({ data, customerName, customerPhoneNumber, propertyName, propertyAddress, checkIn, checkOut, status, updateTransaction, deleteTransaction }) => {
   return (
     <tr>
       <td>
@@ -45,6 +45,9 @@ const TransactionTableRow = ({ data, customerName, customerPhoneNumber, property
         </Link> */}
         <button onClick={() => updateTransaction(data)} className="text-secondary font-weight-bold text-xs" style={{ border: 'none', background: 'transparent' }}>
           <span className='hidden lg:inline'>Edit</span>
+        </button>
+        <button onClick={() => deleteTransaction(data.id)} className="text-secondary font-weight-bold text-xs" style={{ border: 'none', background: 'transparent'}}>
+          Delete
         </button>
       </td>
     </tr>
