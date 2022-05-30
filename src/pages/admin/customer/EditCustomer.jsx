@@ -5,34 +5,44 @@ import Sidebar from '../../../components/admin/Sidebar'
 import InputFieldWithLabel from '../../../components/auth/InputFieldWithLabel'
 import Footer from '../../../components/admin/Footer'
 import InputSelect from '../../../components/form/InputSelect'
+import { doc, Timestamp, updateDoc } from 'firebase/firestore'
+import { db } from '../../../firebase/config'
 
 const EditCustomer = () => {
-  const apiURL = "http://localhost:3001/customers/"
   const { state } = useLocation()
   const navigate = useNavigate()
 
-  const [customer, setCustomer] = useState(state)
+  const [name, setName] = useState(state.data.name)
+  const [email, setEmail] = useState(state.data.email)
+  const [phone_number, setPhoneNumber] = useState(state.data.phone_number)
+  const [date_of_birth, setDateOfBirth] = useState(state.data.date_of_birth)
+  const [checkIn, setCheckIn] = useState(state.data.checkIn)
+  const [status, setStatus] = useState(state.data.status)
 
-  const inputChangeHandler = (event) => {
-    const { name, value } = event.target
-    setCustomer({ ...customer, [name]: value })
-    console.log(customer)
+  // const inputChangeHandler = (event) => {
+  //   const { name, value } = event.target
+  //   setCustomer({ ...customer, [name]: value })
+  //   console.log(customer)
+  // }
+
+  const editDataHandler = async (e) => {
+    e.preventDefault()
+    const customerDocRef = doc(db, 'customers', state.id)
+    try {
+      await updateDoc(customerDocRef, {
+        name: name,
+        email: email,
+        phone_number: phone_number,
+        date_of_birth: date_of_birth,
+        checkIn: checkIn,
+        status: status,
+        created:Timestamp.now(),
+        updated:Timestamp.now(),
+      }).then(() => navigate('/customers'))
+    } catch (err) {
+      alert(err)
+    }
   }
-
-  const editDataHandler = () => {
-    fetch(apiURL + customer.id, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(customer),
-    })
-      .then(response => response.json())
-      .then(() => {
-        navigate('/customers')
-      })
-  }
-
   return (
 
     <>
@@ -48,24 +58,24 @@ const EditCustomer = () => {
                 <hr className="horizontal dark my-3" />
                 <div className="row">
                   <div className="col-md-6">
-                    <InputFieldWithLabel type={'text'} nameId={'name'} label={'Customer Name'} value={customer.name} onChangeHandler={inputChangeHandler}/>
+                    <InputFieldWithLabel type={'text'} nameId={'name'} label={'Customer Name'} value={name} onChangeHandler={(e) => setName(e.target.value)}/>
                   </div>
                   <div className="col-md-6">
-                    <InputFieldWithLabel type={'email'} nameId={'email'} label={'Customer Email'} value={customer.email} onChangeHandler={inputChangeHandler}/>
+                    <InputFieldWithLabel type={'email'} nameId={'email'} label={'Customer Email'} value={email} nChangeHandler={(e) => setEmail(e.target.value)}/>
                   </div>
                 </div>
                 <div className="row">
                   <div className="col-md-6">
-                    <InputFieldWithLabel type={'text'} nameId={'phone_number'} label={'Customer Phone Number'} value={customer.phone_number} onChangeHandler={inputChangeHandler}/>
+                    <InputFieldWithLabel type={'text'} nameId={'phone_number'} label={'Customer Phone Number'} value={phone_number} onChangeHandler={(e) => setPhoneNumber(e.target.value)}/>
                   </div>
                   <div className="col-md-6">
-                    <InputFieldWithLabel type={'date'} nameId={'date_of_birth'} label={'Customer Date of Birth'} value={customer.date_of_birth} onChangeHandler={inputChangeHandler}/>
+                    <InputFieldWithLabel type={'date'} nameId={'date_of_birth'} label={'Customer Date of Birth'} value={date_of_birth} nChangeHandler={(e) => setDateOfBirth(e.target.value)}/>
                   </div>
                   <div className="col-md-6">
-                    <InputFieldWithLabel type={'date'} nameId={'checkIn'} label={'Check In'} onChangeHandler={inputChangeHandler}/>
+                    <InputFieldWithLabel type={'date'} nameId={'checkIn'} label={'Check In'} onChangeHandler={(e) => setCheckIn(e.target.value)}/>
                   </div>
                   <div className="col-md-6">
-                    <InputSelect nameId={'status'} label={'Status'} options={['booking','active','posponed']} onChangeHandler={inputChangeHandler} />
+                    <InputSelect nameId={'status'} label={'Status'} options={['booking','active','posponed']} onChangeHandler={(e) => setStatus(e.target.value)} />
                   </div>
                 </div>
                 <div className="d-flex justify-content-end mb-3">

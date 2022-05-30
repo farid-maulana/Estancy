@@ -5,6 +5,8 @@ import Sidebar from '../../../components/admin/Sidebar'
 import InputFieldWithLabel from '../../../components/auth/InputFieldWithLabel'
 import Footer from '../../../components/admin/Footer'
 import InputSelect from '../../../components/form/InputSelect'
+import { addDoc, collection, Timestamp } from 'firebase/firestore'
+import { db } from '../../../firebase/config'
 
 const CreateCustomer = () => {
   const apiURL = "http://localhost:3001/customers/"
@@ -16,18 +18,24 @@ const CreateCustomer = () => {
     setCustomers({ ...customer, [name]: value })
   }
 
-  const createDataHandler = () => {
-    fetch(apiURL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(customer),
-    })
-      .then(response => response.json())
-      .then(() => {
+  const createDataHandler = async (e) => {
+    e.preventDefault()
+    try {
+      await addDoc(collection(db, 'customers'), {
+        name: customer.name,
+        email: customer.email,
+        phone_number: customer.phone_number,
+        date_of_birth: customer.date_of_birth,
+        checkIn: customer.checkIn,
+        status: customer.status,
+        created:Timestamp.now(),
+        updated:Timestamp.now(),
+      }).then(() => {
         navigate('/customers')
       })
+    } catch (err) {
+      alert(err)
+    }
   }
 
   return (
