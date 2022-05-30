@@ -6,7 +6,7 @@ import Sidebar from '../../../components/admin/Sidebar'
 import Footer from '../../../components/admin/Footer'
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore'
 import { db } from '../../../firebase/config'
-import { doc, updateDoc, deleteDoc} from "firebase/firestore";
+import { doc, deleteDoc} from "firebase/firestore";
 
 
 const Customers = () => {
@@ -28,17 +28,10 @@ const Customers = () => {
     navigate('/customers/edit', { state: data })
   }
 
-  // const deleteDataHandler = (id) => {
-  //   fetch(apiURL + id, { method: 'DELETE' })
-  //     .then(() => {
-  //       getAllDataHandler()
-  //     })
-  // }
-
   const deleteDataHandler = async (id) => {
     const customerDocRef = doc(db, 'customers', id)
-    try{
-      await deleteDoc(customerDocRef)
+    try {
+      await deleteDoc(customerDocRef).then(() => navigate('/customers'))
     } catch (err) {
       alert(err)
     }

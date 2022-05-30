@@ -45,7 +45,7 @@ const CustomerTableRow = ({ data, id, name, email, phone_number, date_of_birth, 
         <button onClick={() => updateCustomer(data)} className='text-secondary font-weight-bold text-xs' style={{ border: 'none', background: 'transparent'}}>
           Edit
         </button>
-        <button onClick={() => deleteCustomer(id)} className="text-secondary font-weight-bold text-xs" style={{ border: 'none', background: 'transparent'}}>
+        <button onClick={() => deleteCustomer(data.id)} className="text-secondary font-weight-bold text-xs" style={{ border: 'none', background: 'transparent'}}>
           Delete
         </button>
       </td>
