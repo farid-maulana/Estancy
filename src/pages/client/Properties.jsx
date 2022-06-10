@@ -1,11 +1,32 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from '../../components/clients/Navbar'
 import Footer from '../../components/clients/Footer'
 import InputWithLabelIcon from '../../components/form/InputWithLabelIcon'
 import Property from '../../components/clients/Property'
-import InputField from '../../components/auth/InputField'
+import InputField from '../../components/form/InputField'
+import { collection, onSnapshot, orderBy, query } from 'firebase/firestore'
+import { db } from '../../firebase/config'
+import { Link } from 'react-router-dom'
+import RadioButton from '../../components/form/RadioButton'
+import CheckBox from '../../components/form/CheckBox'
 
 const Properties = () => {
+  const [properties, setProperties] = useState(false)
+
+  const getAllDataHandler = () => {
+    const q = query(collection(db, 'properties'), orderBy('created', 'desc'))
+    onSnapshot(q, (querySnapshot) => {
+      setProperties(querySnapshot.docs.map(doc => ({
+        id: doc.id,
+        data: doc.data()
+      })))
+    })
+  }
+
+  useEffect(() => {
+    getAllDataHandler()
+  }, [])
+
   return (
     <>
       <Navbar />
@@ -51,150 +72,93 @@ const Properties = () => {
       <section className="mb-7">
         <div className="container">
           <div className='row'>
-            <div className='col-lg-3'>
-              <div class="pt-1 pb-5 position-sticky">
-                <h4>Sort By</h4>
-                <div class="my-3 mx-2">
-                  <div class="form-check mb-3">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="customRadio1" />
-                    <p class="custom-control-label" for="customRadio1">Recommendation</p>
-                  </div>
-                  <div class="form-check mb-3">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="customRadio2" />
-                    <p class="custom-control-label" for="customRadio2">Lowest Price</p>
-                  </div>
-                  <div class="form-check mb-3">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="customRadio3" />
-                    <p class="custom-control-label" for="customRadio3">Highest Price</p>
-                  </div>
-                  <div class="form-check mb-3">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="customRadio4" />
-                    <p class="custom-control-label" for="customRadio4">Review Score</p>
-                  </div>
+            <div className='col-lg-2'>
+              <div className="pt-1 pb-5 position-sticky">
+                <h5>Sort By</h5>
+                <div className="my-3 mx-2">
+                  <RadioButton nameId={'sorting'} text={'Recommendation'} />
+                  <RadioButton nameId={'sorting'} text={'Lowest Price'} />
+                  <RadioButton nameId={'sorting'} text={'Highest Price'} />
+                  <RadioButton nameId={'sorting'} text={'Review Score'} />
                 </div>
-                <h4 class="mt-5">Filter</h4>
-                <div class="my-3 mx-2">
+                <h5 className="mt-5">Filter</h5>
+                <div className="my-3 mx-2">
                   <h6>Price</h6>
-                  <div className='row my-3'>
-                    <div className="col mt-lg-n2 mt-2">
-                      <InputField type={'number'} nameId={'from'} placeholder={'Min price'} />
-                    </div> -
-                    <div className="col mt-lg-n2 mt-2">
-                      <InputField type={'number'} nameId={'to'} placeholder={'Max price'} />
+                  <div className='row'>
+                    <div className='col-lg-3'>
+                      <label htmlFor="min">Min: </label>
+                    </div>
+                    <div className="col-lg-9">
+                      <InputField type={'number'} nameId={'min'} placeholder={'Min price'} size={'sm'}/>
+                    </div>
+                  </div>
+                  <div className='row'>
+                    <div className='col-lg-3'>
+                      <label htmlFor="max">Max: </label>
+                    </div>
+                    <div className="col-lg-9">
+                      <InputField type={'number'} nameId={'max'} placeholder={'Max price'} size={'sm'} />
                     </div>
                   </div>
                 </div>
-                <div class="my-3 mx-2">
+                <div className="my-3 mx-2">
                   <h6>Facility</h6>
                   <div className='row my-3'>
                     <div className='col-12'>
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="fcustomCheck1" />
-                        <p class="custom-control-label" for="customCheck1">Private Pool</p>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="fcustomCheck2" />
-                        <p class="custom-control-label" for="customCheck2">Smoking Area</p>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="fcustomCheck3" />
-                        <p class="custom-control-label" for="customCheck3">Parking Area</p>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="fcustomCheck4" />
-                        <p class="custom-control-label" for="customCheck4">Wifi</p>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="fcustomCheck5" />
-                        <p class="custom-control-label" for="customCheck5">Television</p>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="fcustomCheck6" />
-                        <p class="custom-control-label" for="customCheck6">Pet Approved</p>
-                      </div>
+                      <CheckBox nameId={'private_pool'} text={'Private Pool'} />
+                      <CheckBox nameId={'smoking_area'} text={'Smoking Area'} />
+                      <CheckBox nameId={'wifi'} text={'Wifi'} />
+                      <CheckBox nameId={'television'} text={'Television'} />
+                      <CheckBox nameId={'pet'} text={'Pet Approved'} />
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div className='col-lg-9'>
+            <div className='col-lg-10'>
               <div className="row">
-                <Property
-                  photo={'https://raw.githubusercontent.com/creativetimofficial/public-assets/master/soft-ui-design-system/assets/img/house.jpg'}
-                  name={'Villa Carmela'}
-                  address={'Jalan Abdul Gani Atas, Ngaglik, Kec. Batu, Kota Batu, Jawa Timur, Indonesia'}
-                  bed={'3'}
-                  bath={'4'}
-                  private_pool={'not available'}
-                  price={'1.200.000'} />
-                <Property
-                  photo={'https://raw.githubusercontent.com/creativetimofficial/public-assets/master/soft-ui-design-system/assets/img/pool.jpg'}
-                  name={'Villa Carmela'}
-                  address={'Jalan Abdul Gani Atas, Ngaglik, Kec. Batu, Kota Batu, Jawa Timur, Indonesia'}
-                  bed={'3'}
-                  bath={'4'}
-                  private_pool={'available'}
-                  price={'1.200.000'} />
-                <Property
-                  photo={'https://raw.githubusercontent.com/creativetimofficial/public-assets/master/soft-ui-design-system/assets/img/antalya.jpg'}
-                  name={'Villa Carmela'}
-                  address={'Jalan Abdul Gani Atas, Ngaglik, Kec. Batu, Kota Batu, Jawa Timur, Indonesia'}
-                  bed={'3'}
-                  bath={'4'}
-                  private_pool={'available'}
-                  price={'1.200.000'} />
-                <Property
-                  photo={'https://raw.githubusercontent.com/creativetimofficial/public-assets/master/soft-ui-design-system/assets/img/tiny-house.jpg'}
-                  name={'Villa Carmela'}
-                  address={'Jalan Abdul Gani Atas, Ngaglik, Kec. Batu, Kota Batu, Jawa Timur, Indonesia'}
-                  bed={'3'}
-                  bath={'4'}
-                  private_pool={'available'}
-                  price={'1.200.000'} />
-                <Property
-                  photo={'https://raw.githubusercontent.com/creativetimofficial/public-assets/master/soft-ui-design-system/assets/img/air-bnb.jpg'}
-                  name={'Villa Carmela'}
-                  address={'Jalan Abdul Gani Atas, Ngaglik, Kec. Batu, Kota Batu, Jawa Timur, Indonesia'}
-                  bed={'3'}
-                  bath={'4'}
-                  private_pool={'available'}
-                  price={'1.200.000'} />
-                <Property
-                  photo={'https://raw.githubusercontent.com/creativetimofficial/public-assets/master/soft-ui-design-system/assets/img/palm-house.jpg'}
-                  name={'Villa Carmela'}
-                  address={'Jalan Abdul Gani Atas, Ngaglik, Kec. Batu, Kota Batu, Jawa Timur, Indonesia'}
-                  bed={'3'}
-                  bath={'4'}
-                  private_pool={'not available'}
-                  price={'1.200.000'} />
+                {
+                  properties && properties.map((property, index) => {
+                    return <Property
+                      data={property}
+                      key={index}
+                      photo={property.data.photo}
+                      name={property.data.name}
+                      address={property.data.location}
+                      bed={property.data.bedroom}
+                      bath={property.data.bathroom}
+                      private_pool={property.data.private_pool}
+                      price={new Intl.NumberFormat("id-ID").format(property.data.price)} />
+                  })
+                }
               </div>
-              <div class="row justify-space-between py-2">
-                <div class="col-lg-4 ms-auto">
-                  <ul class="pagination pagination-primary m-4">
-                    <li class="page-item">
-                      <a class="page-link" href="javascript:;" aria-label="Previous">
-                        <span aria-hidden="true"><i class="fa fa-angle-double-left" aria-hidden="true"></i></span>
-                      </a>
+              <div className="row justify-space-between py-2">
+                <div className="col-lg-4 ms-auto">
+                  <ul className="pagination pagination-primary m-4">
+                    <li className="page-item">
+                      <Link className="page-link" to={'#'} aria-label="Previous">
+                        <span aria-hidden="true"><i className="fa fa-angle-double-left" aria-hidden="true"></i></span>
+                      </Link>
                     </li>
-                    <li class="page-item active">
-                      <a class="page-link" href="javascript:;">1</a>
+                    <li className="page-item active">
+                      <Link className="page-link" to={'#'}>1</Link>
                     </li>
-                    <li class="page-item">
-                      <a class="page-link" href="javascript:;">2</a>
+                    <li className="page-item">
+                      <Link className="page-link" to={'#'}>2</Link>
                     </li>
-                    <li class="page-item">
-                      <a class="page-link" href="javascript:;">3</a>
+                    <li className="page-item">
+                      <Link className="page-link" to={'#'}>3</Link>
                     </li>
-                    <li class="page-item">
-                      <a class="page-link" href="javascript:;">4</a>
+                    <li className="page-item">
+                      <Link className="page-link" to={'#'}>4</Link>
                     </li>
-                    <li class="page-item">
-                      <a class="page-link" href="javascript:;">5</a>
+                    <li className="page-item">
+                      <Link className="page-link" to={'#'}>5</Link>
                     </li>
-                    <li class="page-item">
-                      <a class="page-link" href="javascript:;" aria-label="Next">
-                        <span aria-hidden="true"><i class="fa fa-angle-double-right" aria-hidden="true"></i></span>
-                      </a>
+                    <li className="page-item">
+                      <Link className="page-link" to={'#'} aria-label="Next">
+                        <span aria-hidden="true"><i className="fa fa-angle-double-right" aria-hidden="true"></i></span>
+                      </Link>
                     </li>
                   </ul>
                 </div>
