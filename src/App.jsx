@@ -15,9 +15,9 @@ import DetailProperty from './pages/client/PropertyDetail';
 import PropertyDetail from './pages/admin/property/PropertyDetail';
 import CreateProperty from './pages/admin/property/CreateProperty';
 import EditProperty from './pages/admin/property/EditProperty';
-import Transactions from './pages/admin/transaction/Transactions';
-import CreateTransaction from './pages/admin/transaction/CreateTransaction';
-import EditTransaction from './pages/admin/transaction/EditTransactions'
+import Transactions from './pages/admin/transactions/Transactions';
+import CreateTransaction from './pages/admin/transactions/CreateTransaction';
+import EditTransaction from './pages/admin/transactions/EditTransactions'
 import Customers from './pages/admin/customer/Customers';
 import CreateCustomer from './pages/admin/customer/CreateCustomer';
 import EditCustomer from './pages/admin/customer/EditCustomer';
