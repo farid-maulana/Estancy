@@ -4,7 +4,7 @@ const CardFasility = ({ icon, name, value }) => {
   return (
     <div className='col-lg-4 col-md-3 mb-4'>
       <div className='d-flex align-items-center'>
-        <div className="icon icon-shape icon-sm me-3 bg-gradient-primary shadow text-center">
+        <div className="icon icon-shape icon-sm me-3 bg-gradient-dark shadow text-center">
           <i className={icon} style={{ fontSize: '13px' }}></i>
         </div>
         <div className='d-flex flex-column'>

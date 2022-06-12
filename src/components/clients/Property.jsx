@@ -13,7 +13,7 @@ const Property = ({ data, photo, name, address, bed, bath, private_pool, price }
         <div className="card-body px-3 pt-3">
           <div className='d-flex justify-content-between'>
             <div className="mb-3">
-              <Link to={'#'}>
+              <Link to={'/properties/show'} state={data}>
                 <h5>
                   {name}
                 </h5>
