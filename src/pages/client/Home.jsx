@@ -1,12 +1,31 @@
-import React from 'react'
+import { collection, onSnapshot, orderBy, query } from 'firebase/firestore'
+import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import Features from '../../components/clients/Features'
 import Footer from '../../components/clients/Footer'
 import Navbar from '../../components/clients/Navbar'
 import Property from '../../components/clients/Property'
 import Review from '../../components/clients/Review'
 import InputWithLabelIcon from '../../components/form/InputWithLabelIcon'
+import { db } from '../../firebase/config'
 
 const Home = () => {
+  const [properties, setProperties] = useState(false)
+
+  const getAllDataHandler = () => {
+    const q = query(collection(db, 'properties'), orderBy('created', 'desc'))
+    onSnapshot(q, (querySnapshot) => {
+      setProperties(querySnapshot.docs.map(doc => ({
+        id: doc.id,
+        data: doc.data()
+      })))
+    })
+  }
+
+  useEffect(() => {
+    getAllDataHandler()
+  }, [])
+
   return (
     <>
       <Navbar />
@@ -106,57 +125,23 @@ const Home = () => {
             </div>
           </div>
           <div className="row px-6">
-            <Property
-              photo={'https://raw.githubusercontent.com/creativetimofficial/public-assets/master/soft-ui-design-system/assets/img/house.jpg'}
-              name={'Villa Carmela'}
-              address={'Jalan Abdul Gani Atas, Ngaglik, Kec. Batu, Kota Batu, Jawa Timur, Indonesia'}
-              bed={'3'}
-              bath={'4'}
-              private_pool={'not available'}
-              price={'1.200.000'} />
-            <Property
-              photo={'https://raw.githubusercontent.com/creativetimofficial/public-assets/master/soft-ui-design-system/assets/img/pool.jpg'}
-              name={'Villa Carmela'}
-              address={'Jalan Abdul Gani Atas, Ngaglik, Kec. Batu, Kota Batu, Jawa Timur, Indonesia'}
-              bed={'3'}
-              bath={'4'}
-              private_pool={'available'}
-              price={'1.200.000'} />
-            <Property
-              photo={'https://raw.githubusercontent.com/creativetimofficial/public-assets/master/soft-ui-design-system/assets/img/antalya.jpg'}
-              name={'Villa Carmela'}
-              address={'Jalan Abdul Gani Atas, Ngaglik, Kec. Batu, Kota Batu, Jawa Timur, Indonesia'}
-              bed={'3'}
-              bath={'4'}
-              private_pool={'available'}
-              price={'1.200.000'} />
-            <Property
-              photo={'https://raw.githubusercontent.com/creativetimofficial/public-assets/master/soft-ui-design-system/assets/img/tiny-house.jpg'}
-              name={'Villa Carmela'}
-              address={'Jalan Abdul Gani Atas, Ngaglik, Kec. Batu, Kota Batu, Jawa Timur, Indonesia'}
-              bed={'3'}
-              bath={'4'}
-              private_pool={'available'}
-              price={'1.200.000'} />
-            <Property
-              photo={'https://raw.githubusercontent.com/creativetimofficial/public-assets/master/soft-ui-design-system/assets/img/air-bnb.jpg'}
-              name={'Villa Carmela'}
-              address={'Jalan Abdul Gani Atas, Ngaglik, Kec. Batu, Kota Batu, Jawa Timur, Indonesia'}
-              bed={'3'}
-              bath={'4'}
-              private_pool={'available'}
-              price={'1.200.000'} />
-            <Property
-              photo={'https://raw.githubusercontent.com/creativetimofficial/public-assets/master/soft-ui-design-system/assets/img/palm-house.jpg'}
-              name={'Villa Carmela'}
-              address={'Jalan Abdul Gani Atas, Ngaglik, Kec. Batu, Kota Batu, Jawa Timur, Indonesia'}
-              bed={'3'}
-              bath={'4'}
-              private_pool={'not available'}
-              price={'1.200.000'} />
+            {
+              properties && properties.map((property, index) => {
+                return <Property
+                  data={property}
+                  key={index}
+                  photo={property.data.photo}
+                  name={property.data.name}
+                  address={property.data.location}
+                  bed={property.data.bedroom}
+                  bath={property.data.bathroom}
+                  private_pool={property.data.private_pool}
+                  price={new Intl.NumberFormat("id-ID").format(property.data.price)} />
+              })
+            }
           </div>
           <div className='d-flex justify-content-center mt-4'>
-            <button className='btn bg-gradient-primary btn-rounded'>Load more</button>
+            <Link to={'/listed-properties'} className='btn bg-gradient-primary btn-rounded'>Load more</Link>
           </div>
         </div>
       </section>
